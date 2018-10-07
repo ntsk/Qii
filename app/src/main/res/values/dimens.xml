@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Font -->
+    <dimen name="text_headline">24sp</dimen>
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_subheader">16sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+
+    <!-- Space -->
+    <dimen name="spacing_sub_narrow">4dp</dimen>
+    <dimen name="spacing_narrow">6dp</dimen>
+    <dimen name="spacing_sub_medium">8dp</dimen>
+    <dimen name="spacing_medium">12dp</dimen>
+    <dimen name="spacing_sub_wide">16dp</dimen>
+    <dimen name="spacing_wide">18dp</dimen>
+    <dimen name="spacing_ultra_wide">24dp</dimen>
+</resources>
+
