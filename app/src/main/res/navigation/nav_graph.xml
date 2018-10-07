@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/favoritesFragment">
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.qii.ntsk.qii.FavoritesFragment"
+        android:label="Favorites" />
+
+    <fragment
+        android:id="@+id/stocksFragment"
+        android:name="com.qii.ntsk.qii.StocksFragment"
+        android:label="Stocks" />
+</navigation>
