@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         private const val FRAGMENT_ID = R.id.fragment_container
     }
 
-    private val toolbarTitles = arrayOf("Home", "Favorite", "Stocks")
+    private val toolbarTitles = arrayOf("Home", "Favorite", "Stocks", "User")
 
     private lateinit var binding: ActivityMainBinding
 
@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_stock -> {
                     binding.toolbar.title = toolbarTitles[2]
                     replaceFragment(StocksFragment())
+                }
+                R.id.nav_user -> {
+                    binding.toolbar.title = toolbarTitles[3]
+                    replaceFragment(UserFragment())
                 }
                 else -> {
                     replaceFragment(HomeFragment())
