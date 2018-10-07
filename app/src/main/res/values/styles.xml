@@ -8,6 +8,16 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
-  <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Widget.Qii" parent="@android:style/Widget"/>
+
+  <style name="Widget.Qii.Tag">
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:lines">1</item>
+  </style>
+
+  <style name="Widget.Qii.Tag.Inline">
+    <item name="android:drawablePadding">@dimen/spacing_narrow</item>
+    <item name="android:drawableStart">@drawable/tag_dot</item>
+  </style>
 
 </resources>
