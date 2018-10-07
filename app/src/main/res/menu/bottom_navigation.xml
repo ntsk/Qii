@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/homeFragment"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/bottom_nav_home" />
 
         <item
-            android:id="@+id/favoritesFragment"
+            android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_thumb_up"
             android:title="@string/bottom_nav_favorite" />
         <item
-            android:id="@+id/stocksFragment"
+            android:id="@+id/nav_stock"
             android:icon="@drawable/ic_folder"
             android:title="@string/bottom_nav_stocks" />
     </group>
