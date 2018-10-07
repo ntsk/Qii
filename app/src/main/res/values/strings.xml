@@ -1,5 +1,6 @@
 <resources>
   <string name="app_name">Qii</string>
-    <string name="drawer_menu_favorite">Favorite</string>
-  <string name="drawer_menu_stocks">Stocks</string>
+    <string name="bottom_nav_favorite">Favorite</string>
+  <string name="bottom_nav_stocks">Stocks</string>
+  <string name="bottom_nav_home">Home</string>
 </resources>
