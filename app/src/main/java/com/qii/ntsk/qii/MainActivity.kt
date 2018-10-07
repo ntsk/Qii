@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         private const val FRAGMENT_ID = R.id.fragment_container
     }
 
+    private val toolbarTitles = arrayOf("Home", "Favorite", "Stocks")
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,16 +20,20 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setDefaultFragment(HomeFragment())
+        binding.toolbar.title = toolbarTitles[0]
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
+                    binding.toolbar.title = toolbarTitles[0]
                     replaceFragment(HomeFragment())
                 }
                 R.id.nav_favorite -> {
+                    binding.toolbar.title = toolbarTitles[1]
                     replaceFragment(FavoritesFragment())
                 }
                 R.id.nav_stock -> {
+                    binding.toolbar.title = toolbarTitles[2]
                     replaceFragment(StocksFragment())
                 }
                 else -> {
