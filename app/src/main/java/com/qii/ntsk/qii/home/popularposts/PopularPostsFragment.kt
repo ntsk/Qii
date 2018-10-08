@@ -1,10 +1,11 @@
-package com.qii.ntsk.qii
+package com.qii.ntsk.qii.home.popularposts
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
 
 class PopularPostsFragment : Fragment() {

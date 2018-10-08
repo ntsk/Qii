@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii
+package com.qii.ntsk.qii.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentHomeBinding
+import com.qii.ntsk.qii.home.newposts.NewPostsFragment
+import com.qii.ntsk.qii.home.popularposts.PopularPostsFragment
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding

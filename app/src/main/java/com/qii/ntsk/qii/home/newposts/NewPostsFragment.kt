@@ -1,22 +1,24 @@
-package com.qii.ntsk.qii
+package com.qii.ntsk.qii.home.newposts
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.qii.ntsk.qii.databinding.FragmentUserBinding
+import com.qii.ntsk.qii.R
+import com.qii.ntsk.qii.databinding.FragmentNewPostsBinding
 
-class UserFragment : Fragment() {
-    private lateinit var binding: FragmentUserBinding
+class NewPostsFragment : Fragment() {
+    private lateinit var binding: FragmentNewPostsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_user, container, false)
+        return inflater.inflate(R.layout.fragment_new_posts, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentUserBinding.bind(view)
+        binding = FragmentNewPostsBinding.bind(view)
     }
+
 }
