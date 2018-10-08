@@ -4,6 +4,8 @@ buildscript {
     ext.materialVersion = '1.0.0'
     ext.supportLibVersion = '1.0.0'
     ext.epoxyVersion = '2.16.4'
+    ext.retrofitVersion = '2.4.0'
+    ext.moshiVersion = '1.6.0'
     repositories {
         google()
         jcenter()
