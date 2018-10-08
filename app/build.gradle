@@ -25,6 +25,11 @@ android {
     dataBinding {
         enabled = true
     }
+    kotlin {
+        experimental {
+            coroutines 'enable'
+        }
+    }
 }
 
 kapt {
@@ -33,7 +38,8 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
     implementation "androidx.appcompat:appcompat:$supportLibVersion"
     implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
