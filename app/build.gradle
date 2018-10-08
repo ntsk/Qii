@@ -56,6 +56,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     implementation 'com.airbnb.android:mvrx:0.5.0'
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
     implementation 'com.airbnb.android:epoxy-databinding:2.14.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
