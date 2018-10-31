@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.stocks
+package com.qii.ntsk.qii.ui.stocks
 
 import android.os.Bundle
 import android.view.LayoutInflater

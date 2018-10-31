@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
 import com.qii.ntsk.qii.home.HomeFragment
-import com.qii.ntsk.qii.stocks.StocksFragment
+import com.qii.ntsk.qii.ui.stocks.StocksFragment
 import com.qii.ntsk.qii.user.UserFragment
 
 class MainActivity : AppCompatActivity() {
