@@ -1,18 +1,18 @@
 package com.qii.ntsk.qii.model.entity
 
 data class User(
-        var id: String,
-        var permanentId: Int,
-        var name: String?,
-        var description: String?,
-        var facebookId: String?,
-        var linkedinId: String?,
-        var twitterScreenName: String?,
-        var followeesCount: Int,
-        var followersCount: Int,
-        var githubLoginName: String?,
-        var location: String?,
-        var organization: String?,
-        var profileImageUrl: String,
-        var websiteUrl: String?
+        val id: String,
+        val permanentId: Int,
+        val name: String?,
+        val description: String?,
+        val facebookId: String?,
+        val linkedinId: String?,
+        val twitterScreenName: String?,
+        val followeesCount: Int,
+        val followersCount: Int,
+        val githubLoginName: String?,
+        val location: String?,
+        val organization: String?,
+        val profileImageUrl: String,
+        val websiteUrl: String?
 )

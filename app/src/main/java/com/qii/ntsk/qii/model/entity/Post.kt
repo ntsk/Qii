@@ -1,14 +1,14 @@
 package com.qii.ntsk.qii.model.entity
 
 data class Post(
-        var id: String,
-        var title: String,
-        var body: String,
-        var commentsCount: Int,
-        var likesCount: Int,
-        var pageViewsCount: Int,
-        var created_at: String,
-        var updated_at: String,
-        var tags: List<Tag>,
-        var user : User
+        val id: String,
+        val title: String,
+        val body: String,
+        val commentsCount: Int,
+        val likesCount: Int,
+        val pageViewsCount: Int,
+        val created_at: String,
+        val updated_at: String,
+        val tags: List<Tag>,
+        val user: User
 )

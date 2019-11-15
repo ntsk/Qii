@@ -1,8 +1,8 @@
 package com.qii.ntsk.qii.model.entity
 
 data class Tag(
-        var id: String,
-        var followersCount: Int,
-        var itemsCount: Int,
-        var iconUrl: String?
+        val id: String,
+        val followersCount: Int,
+        val itemsCount: Int,
+        val iconUrl: String?
 )
