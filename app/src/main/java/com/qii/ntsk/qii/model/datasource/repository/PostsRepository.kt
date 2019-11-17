@@ -1,6 +1,5 @@
 package com.qii.ntsk.qii.model.datasource.repository
 
-import android.content.ClipData
 import com.qii.ntsk.qii.model.datasource.ApiClient
 import com.qii.ntsk.qii.model.datasource.QiitaService
 import com.qii.ntsk.qii.model.entity.Post
