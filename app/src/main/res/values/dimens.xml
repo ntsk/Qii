@@ -3,7 +3,7 @@
     <!-- Font -->
     <dimen name="text_headline">18sp</dimen>
     <dimen name="text_title">16sp</dimen>
-    <dimen name="text_subheader">14sp</dimen>
+    <dimen name="text_sub_header">14sp</dimen>
     <dimen name="text_body">12sp</dimen>
     <dimen name="text_caption">10sp</dimen>
 

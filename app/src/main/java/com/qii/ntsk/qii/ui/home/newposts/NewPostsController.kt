@@ -3,6 +3,7 @@ package com.qii.ntsk.qii.ui.home.newposts
 import com.airbnb.epoxy.EpoxyController
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.modelPostItem
+import com.qii.ntsk.qii.utils.DateFormatUtil
 
 class NewPostsController : EpoxyController(){
     val posts = ArrayList<Post>()
@@ -13,7 +14,7 @@ class NewPostsController : EpoxyController(){
                 id(it.id)
                 title(it.title)
                 description(it.body)
-                date(it.created_at)
+                date(DateFormatUtil.formatTimeAndDate(it.created_at))
             }
         }
     }
