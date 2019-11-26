@@ -1,35 +1,29 @@
 package com.qii.ntsk.qii.ui.home.newposts
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.qii.ntsk.qii.model.datasource.repository.PostsRepository
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.qii.ntsk.qii.model.datasource.repository.PostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
-import kotlinx.coroutines.launch
 
 class NewPostsViewModel(app: Application) : AndroidViewModel(app) {
-    private val repository = PostsRepository()
-    val newPostsLiveData: MutableLiveData<List<Post>> = MutableLiveData()
+    var newPostsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
 
     init {
        load()
     }
 
     private fun load() {
-        viewModelScope.launch {
-            val response = repository.fetch("1", "20")
-            if (response.isSuccessful) {
-                newPostsLiveData.postValue(response.body())
-            } else {
-                newPostsLiveData.postValue(listOf())
-            }
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val app: Application) : ViewModelProvider.NewInstanceFactory() {
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return NewPostsViewModel(app) as T
-        }
+        val factory = PostsDataSource.Factory(viewModelScope)
+        val config = PagedList.Config.Builder()
+                .setInitialLoadSizeHint(20)
+                .setPageSize(20)
+                .setMaxSize(100)
+                .build()
+        newPostsLiveData = LivePagedListBuilder(factory, config).build()
     }
 }

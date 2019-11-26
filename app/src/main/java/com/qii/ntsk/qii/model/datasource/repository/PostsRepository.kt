@@ -6,8 +6,8 @@ import com.qii.ntsk.qii.model.entity.Post
 import retrofit2.Response
 
 class PostsRepository {
-    suspend fun fetch(page: String, per: String): Response<List<Post>> {
+    suspend fun fetch(page: String, per: String, query: String?): Response<List<Post>> {
         return ApiClient.create(QiitaService::class.java)
-                .getItems(page, per, null)
+                .getItems(page, per, query)
     }
 }

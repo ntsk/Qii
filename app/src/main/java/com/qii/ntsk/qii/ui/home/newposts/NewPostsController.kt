@@ -1,25 +1,18 @@
 package com.qii.ntsk.qii.ui.home.newposts
 
-import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.paging.PagedListEpoxyController
+import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.modelPostItem
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
-class NewPostsController : EpoxyController(){
-    val posts = ArrayList<Post>()
+class NewPostsController : PagedListEpoxyController<Post>(){
 
-    override fun buildModels() {
-        posts.forEach{
-            modelPostItem {
-                id(it.id)
-                title(it.title)
-                description(it.body)
-                date(DateFormatUtil.formatTimeAndDate(it.created_at))
-            }
-        }
-    }
-
-    fun addPosts(posts: List<Post>) {
-        this.posts.addAll(posts)
+    override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
+        return ModelPostItemBindingModel_()
+                .id(item?.id)
+                .title(item?.title)
+                .description(item?.body)
+                .date(DateFormatUtil.formatTimeAndDate(item?.created_at ?: ""))
     }
 }

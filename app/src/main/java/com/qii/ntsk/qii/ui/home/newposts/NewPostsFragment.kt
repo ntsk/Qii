@@ -28,8 +28,8 @@ class NewPostsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.newPostsLiveData.observe(viewLifecycleOwner, Observer { posts ->
-            controller.addPosts(posts)
+        viewModel.newPostsLiveData.observe(viewLifecycleOwner, Observer { pagedList ->
+            controller.submitList(pagedList)
             controller.requestModelBuild()
         })
     }
