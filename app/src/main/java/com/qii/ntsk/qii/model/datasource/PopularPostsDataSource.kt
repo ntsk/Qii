@@ -7,12 +7,13 @@ import com.qii.ntsk.qii.model.repository.PostsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
+class PopularPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
     private val repository = PostsRepository()
+    private val query = "stocks:>30"
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
         scope.launch {
-            val response = repository.fetch(DEFAULT_PAGE, params.requestedLoadSize.toString(), null)
+            val response = repository.fetch(DEFAULT_PAGE, params.requestedLoadSize.toString(), query)
             val body = response.body()
             if (response.isSuccessful && body != null) {
                 callback.onResult(body.toMutableList(), DEFAULT_PAGE, "2")
@@ -25,7 +26,7 @@ class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSourc
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Post>) {
 
         scope.launch {
-            val response = repository.fetch(params.key, params.requestedLoadSize.toString(), null)
+            val response = repository.fetch(params.key, params.requestedLoadSize.toString(), query)
             val body = response.body()
             var currentPage = params.key.toInt()
 
@@ -44,7 +45,7 @@ class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSourc
 
     class Factory(private val scope: CoroutineScope) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return NewPostsDataSource(scope)
+            return PopularPostsDataSource(scope)
         }
     }
 
