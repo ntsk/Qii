@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model.datasource
+package com.qii.ntsk.qii.model.service
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

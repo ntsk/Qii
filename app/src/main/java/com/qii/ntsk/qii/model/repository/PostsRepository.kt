@@ -1,7 +1,7 @@
-package com.qii.ntsk.qii.model.datasource.repository
+package com.qii.ntsk.qii.model.repository
 
-import com.qii.ntsk.qii.model.datasource.ApiClient
-import com.qii.ntsk.qii.model.datasource.QiitaService
+import com.qii.ntsk.qii.model.service.ApiClient
+import com.qii.ntsk.qii.model.service.QiitaService
 import com.qii.ntsk.qii.model.entity.Post
 import retrofit2.Response
 

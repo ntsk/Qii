@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.qii.ntsk.qii.model.datasource.repository.PostsDataSource
+import com.qii.ntsk.qii.model.datasource.NewPostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
 
 class NewPostsViewModel(app: Application) : AndroidViewModel(app) {
@@ -18,7 +18,7 @@ class NewPostsViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun load() {
-        val factory = PostsDataSource.Factory(viewModelScope)
+        val factory = NewPostsDataSource.Factory(viewModelScope)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)

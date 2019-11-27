@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model.datasource
+package com.qii.ntsk.qii.model.service
 
 import com.qii.ntsk.qii.model.entity.Post
 import retrofit2.Response

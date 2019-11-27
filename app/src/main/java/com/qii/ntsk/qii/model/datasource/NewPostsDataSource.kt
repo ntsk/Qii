@@ -1,12 +1,13 @@
-package com.qii.ntsk.qii.model.datasource.repository
+package com.qii.ntsk.qii.model.datasource
 
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.qii.ntsk.qii.model.entity.Post
+import com.qii.ntsk.qii.model.repository.PostsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class PostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
+class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
     private val repository = PostsRepository()
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
@@ -44,7 +45,7 @@ class PostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<S
 
     class Factory(private val scope: CoroutineScope) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return PostsDataSource(scope)
+            return NewPostsDataSource(scope)
         }
     }
 
