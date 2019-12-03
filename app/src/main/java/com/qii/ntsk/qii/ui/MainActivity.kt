@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
 import com.qii.ntsk.qii.home.HomeFragment
+import com.qii.ntsk.qii.ui.search.SearchFragment
 import com.qii.ntsk.qii.ui.stocks.StocksFragment
 import com.qii.ntsk.qii.user.UserFragment
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         private const val FRAGMENT_ID = R.id.fragment_container
     }
 
-    private val toolbarTitles = arrayOf("Home", "Favorite", "Stocks", "User")
+    private val toolbarTitles = arrayOf("Home", "Favorite", "Search", "User")
 
     private lateinit var binding: ActivityMainBinding
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_stock -> {
                     binding.toolbar.title = toolbarTitles[2]
-                    replaceFragment(StocksFragment())
+                    replaceFragment(SearchFragment())
                 }
                 R.id.nav_user -> {
                     binding.toolbar.title = toolbarTitles[3]
