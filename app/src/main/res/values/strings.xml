@@ -5,4 +5,6 @@
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_user">User</string>
     <string name="bottom_nav_search">Search</string>
+    <string name="search_bottom_sheet_title">Filter</string>
+    <string name="label_tags">Tags</string>
 </resources>
