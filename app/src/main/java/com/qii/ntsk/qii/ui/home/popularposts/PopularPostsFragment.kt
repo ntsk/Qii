@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.home.popularposts
+package com.qii.ntsk.qii.ui.home.popularposts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
-import com.qii.ntsk.qii.ui.home.newposts.NewPostsViewModel
-import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsController
-import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsViewModel
 
 class PopularPostsFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(PopularPostsViewModel::class.java) }

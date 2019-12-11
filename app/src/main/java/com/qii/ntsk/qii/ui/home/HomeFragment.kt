@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentHomeBinding
 import com.qii.ntsk.qii.ui.home.newposts.NewPostsFragment
-import com.qii.ntsk.qii.home.popularposts.PopularPostsFragment
+import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsFragment
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
