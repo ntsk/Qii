@@ -1,6 +1,7 @@
 package com.qii.ntsk.qii.ui.search
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -11,9 +12,8 @@ import com.airbnb.epoxy.ModelView
 import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagsBinding
-import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.model.entity.Tag
-import com.qii.ntsk.qii.utils.ColorsUtil
+import com.qii.ntsk.qii.model.state.TagsState
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class TagsView @JvmOverloads constructor(
@@ -26,22 +26,28 @@ class TagsView @JvmOverloads constructor(
     @ModelProp
     fun setTags(tags: List<Tag>) {
         binding.viewTagsChipGroup.removeAllViews()
-        tags.forEach { tag ->
+        tags.forEachIndexed { index, tag ->
             val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_tag_chip, binding.viewTagsChipGroup, false) as Chip
-
-            val drawable = GradientDrawable()
-            drawable.setColor(ColorsUtil.random(context))
-            drawable.shape = GradientDrawable.OVAL
-
-            chip.id = View.generateViewId()
-            chip.text = tag.id
-            chip.chipIcon = drawable
-            chip.setOnClickListener {
-                tag.isSelected = chip.isChecked
-                TagsState.update(tag)
-            }
-            chip.isChecked = tag.isSelected
-            binding.viewTagsChipGroup.addView(chip)
+            binding.viewTagsChipGroup.addView(chip.also {
+                it.id = View.generateViewId()
+                it.text = tag.id
+                it.chipIcon = generateColorDrawable(index)
+                it.setOnClickListener {
+                    tag.isSelected = chip.isChecked
+                    TagsState.update(tag)
+                }
+                it.isChecked = tag.isSelected
+            })
         }
+    }
+
+    private fun generateColorDrawable(index: Int): GradientDrawable {
+        val drawable = GradientDrawable()
+        val arrayId = context.resources.getIdentifier("material_color", "array", context.packageName)
+        val materialColors = context.resources.obtainTypedArray(arrayId)
+        drawable.setColor(materialColors.getColor(index, Color.WHITE))
+        materialColors.recycle()
+        drawable.shape = GradientDrawable.OVAL
+        return drawable
     }
 }

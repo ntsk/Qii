@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="material_color">
-        <item name="red_50" type="color">#fde0dc</item>
-        <item name="pink_50" type="color">#fce4ec</item>
-        <item name="purple_50" type="color">#f3e5f5</item>
-        <item name="deep_purple_50" type="color">#ede7f6</item>
-        <item name="indigo_50" type="color">#e8eaf6</item>
-        <item name="blue_50" type="color">#e7e9fd</item>
-        <item name="light_blue_50" type="color">#e1f5fe</item>
-        <item name="cyan_50" type="color">#e0f7fa</item>
-        <item name="teal_50" type="color">#e0f2f1</item>
-        <item name="green_50" type="color">#d0f8ce</item>
-        <item name="light_green_50" type="color">#f1f8e9</item>
-        <item name="lime_50" type="color">#f9fbe7</item>
-        <item name="yellow_50" type="color">#fffde7</item>
-        <item name="amber_50" type="color">#fff8e1</item>
-        <item name="orange_50" type="color">#fff3e0</item>
-        <item name="deep_orange_50" type="color">#fbe9e7</item>
-        <item name="brown_50" type="color">#efebe9</item>
-        <item name="grey_50" type="color">#fafafa</item>
-        <item name="blue_grey_50" type="color">#eceff1</item>
-        <item name="red_100" type="color">#f9bdbb</item>
-        <item name="pink_100" type="color">#f8bbd0</item>
-        <item name="purple_100" type="color">#e1bee7</item>
-        <item name="deep_purple_100" type="color">#d1c4e9</item>
-        <item name="indigo_100" type="color">#c5cae9</item>
-        <item name="blue_100" type="color">#d0d9ff</item>
-        <item name="light_blue_100" type="color">#b3e5fc</item>
-        <item name="cyan_100" type="color">#b2ebf2</item>
-        <item name="teal_100" type="color">#b2dfdb</item>
-        <item name="green_100" type="color">#a3e9a4</item>
-        <item name="light_green_100" type="color">#dcedc8</item>
-        <item name="lime_100" type="color">#f0f4c3</item>
-        <item name="yellow_100" type="color">#fff9c4</item>
-        <item name="amber_100" type="color">#ffecb3</item>
-        <item name="orange_100" type="color">#ffe0b2</item>
-        <item name="deep_orange_100" type="color">#ffccbc</item>
-        <item name="brown_100" type="color">#d7ccc8</item>
-        <item name="grey_100" type="color">#f5f5f5</item>
-        <item name="blue_grey_100" type="color">#cfd8dc</item>
         <item name="red_200" type="color">#f69988</item>
         <item name="pink_200" type="color">#f48fb1</item>
         <item name="purple_200" type="color">#ce93d8</item>
