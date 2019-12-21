@@ -32,7 +32,6 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
             controller.requestModelBuild()
         }
 
-
         dialog.setContentView(view)
     }
 
