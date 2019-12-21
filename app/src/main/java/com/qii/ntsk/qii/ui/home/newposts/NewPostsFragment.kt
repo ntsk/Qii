@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,11 +23,15 @@ class NewPostsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_new_posts, container, false)
         binding = FragmentNewPostsBinding.bind(view)
         binding.isLoading = true
-        binding.fragmentNewPostsRecyclerView.setController(controller)
-        binding.fragmentNewPostsRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+
+        val recyclerView = binding.fragmentNewPostsRecyclerView
+        recyclerView.setController(controller)
+        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         controller.addModelBuildListener {
             if (binding.isLoading) {
                 binding.isLoading = false
+                recyclerView.scheduleLayoutAnimation()
             }
         }
         return view
