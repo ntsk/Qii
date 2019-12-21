@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
-import com.qii.ntsk.qii.model.cache.TagsCache
+import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.model.entity.Tags
 
 class SearchFragment : Fragment() {
@@ -26,10 +26,10 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val tagsCache = TagsCache.read()
+        val tagsCache = TagsState.get()
         if (tagsCache == null) {
             viewModel.fetchTags().observe(viewLifecycleOwner, Observer { tags ->
-                TagsCache.write(tags)
+                TagsState.addAll(tags)
                 initBottomSheet(tags)
             })
         } else {

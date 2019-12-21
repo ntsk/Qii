@@ -6,5 +6,6 @@ data class Tag(
         val id: String,
         val followersCount: Int,
         val itemsCount: Int,
-        val iconUrl: String?
+        val iconUrl: String?,
+        var isSelected: Boolean = false
 ) : Serializable

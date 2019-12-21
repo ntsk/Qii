@@ -11,6 +11,7 @@ import com.airbnb.epoxy.ModelView
 import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagsBinding
+import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.utils.ColorsUtil
 
@@ -35,6 +36,11 @@ class TagsView @JvmOverloads constructor(
             chip.id = View.generateViewId()
             chip.text = tag.id
             chip.chipIcon = drawable
+            chip.setOnClickListener {
+                tag.isSelected = chip.isChecked
+                TagsState.update(tag)
+            }
+            chip.isChecked = tag.isSelected
             binding.viewTagsChipGroup.addView(chip)
         }
     }
