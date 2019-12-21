@@ -21,8 +21,14 @@ class NewPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_new_posts, container, false)
         binding = FragmentNewPostsBinding.bind(view)
+        binding.isLoading = true
         binding.fragmentNewPostsRecyclerView.setController(controller)
         binding.fragmentNewPostsRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        controller.addModelBuildListener {
+            if (binding.isLoading) {
+                binding.isLoading = false
+            }
+        }
         return view
     }
 

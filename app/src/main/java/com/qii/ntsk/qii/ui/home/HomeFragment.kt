@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.home
+package com.qii.ntsk.qii.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

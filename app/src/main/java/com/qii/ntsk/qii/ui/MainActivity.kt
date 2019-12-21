@@ -1,14 +1,15 @@
 package com.qii.ntsk.qii
 
+import android.content.DialogInterface
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
-import com.qii.ntsk.qii.home.HomeFragment
+import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment
-import com.qii.ntsk.qii.ui.stocks.StocksFragment
 import com.qii.ntsk.qii.user.UserFragment
 
 class MainActivity : AppCompatActivity() {

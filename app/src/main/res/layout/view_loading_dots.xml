@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.eyalbira.loadingdots.LoadingDots
+        android:id="@+id/loading_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:LoadingDots_auto_play="true"
+        app:LoadingDots_dots_color="@color/colorAccent"
+        app:LoadingDots_dots_count="3"
+        app:LoadingDots_dots_size="16dp"
+        app:LoadingDots_dots_space="8dp" />
+
+</layout>

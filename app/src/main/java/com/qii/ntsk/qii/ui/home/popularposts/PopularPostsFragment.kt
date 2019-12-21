@@ -21,8 +21,15 @@ class PopularPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_popular_posts, container, false)
         binding = FragmentPopularPostsBinding.bind(view)
+        binding.isLoading = true
         binding.fragmentPopularPostsRecyclerView.setController(controller)
         binding.fragmentPopularPostsRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentPopularPostsRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        controller.addModelBuildListener {
+            if (binding.isLoading) {
+                binding.isLoading = false
+            }
+        }
         return view
     }
 
