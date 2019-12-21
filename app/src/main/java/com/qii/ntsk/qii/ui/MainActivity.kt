@@ -52,6 +52,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setTitle("Confirm")
+                .setMessage("Are you sure you want to quit?")
+                .setPositiveButton("Yes") { _, _ -> finish() }
+                .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
+                .show()
+    }
+
     private fun <F> setDefaultFragment(fragment: F) where F : Fragment {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(FRAGMENT_ID, fragment)
