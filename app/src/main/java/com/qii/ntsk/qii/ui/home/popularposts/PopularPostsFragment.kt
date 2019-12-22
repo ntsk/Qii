@@ -1,7 +1,6 @@
 package com.qii.ntsk.qii.ui.home.popularposts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
-import com.qii.ntsk.qii.model.datasource.PopularPostsDataSource
 
 class PopularPostsFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(PopularPostsViewModel::class.java) }
@@ -41,16 +39,14 @@ class PopularPostsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.popularPostsLiveData.observe(viewLifecycleOwner, Observer { pagedList ->
-
-            val dataSource = pagedList.dataSource as PopularPostsDataSource
-            dataSource.errorObserver.observe(viewLifecycleOwner, Observer {
-                binding.showError = true
-                binding.isLoading = false
-            })
-
+        viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()
+        })
+
+        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
+            binding.showError = true
+            binding.isLoading = false
         })
     }
 }

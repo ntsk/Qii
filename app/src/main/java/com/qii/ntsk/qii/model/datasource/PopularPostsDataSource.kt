@@ -1,6 +1,5 @@
 package com.qii.ntsk.qii.model.datasource
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
@@ -9,10 +8,9 @@ import com.qii.ntsk.qii.model.repository.PostsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class PopularPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
+class PopularPostsDataSource(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>) : PageKeyedDataSource<String, Post>() {
     private val repository = PostsRepository()
     private val query = "stocks:>30"
-    val errorObserver = MutableLiveData<Int>()
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
         scope.launch {
@@ -46,9 +44,9 @@ class PopularPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataS
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope) : DataSource.Factory<String, Post>() {
+    class Factory(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return PopularPostsDataSource(scope)
+            return PopularPostsDataSource(scope, errorObserver)
         }
     }
 
