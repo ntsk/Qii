@@ -6,8 +6,7 @@ import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
-class PopularPostsController: PagedListEpoxyController<Post>(){
-
+class PopularPostsController : PagedListEpoxyController<Post>() {
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
         return ModelPostItemBindingModel_()
                 .id(item?.id)
