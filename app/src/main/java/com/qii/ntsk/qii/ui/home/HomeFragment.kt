@@ -35,10 +35,10 @@ class HomePagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     private val titles = arrayOf("Popular", "New")
 
     override fun getItem(position: Int): Fragment {
-        when (position) {
-            0 -> return PopularPostsFragment()
-            1 -> return NewPostsFragment()
-            else -> return PopularPostsFragment()
+        return when (position) {
+            0 -> PopularPostsFragment()
+            1 -> NewPostsFragment()
+            else -> PopularPostsFragment()
         }
     }
 
