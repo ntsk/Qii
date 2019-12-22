@@ -1,5 +1,7 @@
 package com.qii.ntsk.qii.model.datasource
 
+import android.support.v4.app.INotificationSideChannel
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.qii.ntsk.qii.model.entity.Post
@@ -7,7 +9,7 @@ import com.qii.ntsk.qii.model.repository.PostsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSource<String, Post>() {
+class NewPostsDataSource(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>) : PageKeyedDataSource<String, Post>() {
     private val repository = PostsRepository()
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
@@ -17,7 +19,7 @@ class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSourc
             if (response.isSuccessful && body != null) {
                 callback.onResult(body.toMutableList(), DEFAULT_PAGE, "2")
             } else {
-                callback.onResult(mutableListOf(), DEFAULT_PAGE, "2")
+                errorObserver.postValue(response.code())
             }
         }
     }
@@ -42,9 +44,9 @@ class NewPostsDataSource(private val scope: CoroutineScope) : PageKeyedDataSourc
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope) : DataSource.Factory<String, Post>() {
+    class Factory(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return NewPostsDataSource(scope)
+            return NewPostsDataSource(scope, errorObserver)
         }
     }
 

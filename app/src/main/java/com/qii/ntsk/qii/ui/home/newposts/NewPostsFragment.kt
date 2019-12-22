@@ -43,5 +43,10 @@ class NewPostsFragment : Fragment() {
             controller.submitList(pagedList)
             controller.requestModelBuild()
         })
+
+        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
+            binding.showError = true
+            binding.isLoading = false
+        })
     }
 }
