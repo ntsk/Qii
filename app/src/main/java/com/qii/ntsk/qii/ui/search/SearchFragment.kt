@@ -11,6 +11,7 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
 import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.model.entity.Tags
+import com.qii.ntsk.qii.utils.QueryBuilder
 
 class SearchFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(SearchViewModel::class.java) }
@@ -27,22 +28,25 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val tagsCache = TagsState.get()
-        if (tagsCache == null) {
+        val tagsState = TagsState.get()
+        if (tagsState == null) {
             viewModel.fetchTags().observe(viewLifecycleOwner, Observer { tags ->
                 TagsState.addAll(tags)
                 initBottomSheet(tags)
             })
         } else {
-            initBottomSheet(tagsCache)
+            initBottomSheet(tagsState)
         }
     }
 
     private fun initBottomSheet(tags: Tags) {
         binding.fragmentSearchPostsFab.setOnClickListener {
             val bottomSheet = SearchBottomSheetFragment.Builder(tags).build()
+            bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterCompleteListener {
+                override fun onComplete() {
+                }
+            })
             bottomSheet.show(requireFragmentManager(), bottomSheet.tag)
-
         }
     }
 }

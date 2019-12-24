@@ -13,6 +13,8 @@ import com.qii.ntsk.qii.databinding.FragmentSearchBottomSheetBinding
 import com.qii.ntsk.qii.model.entity.Tags
 
 class SearchBottomSheetFragment : BottomSheetDialogFragment() {
+    private var filterCompleteListener: FilterCompleteListener? = null
+
     override fun setupDialog(dialog: Dialog, style: Int) {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_search_bottom_sheet, null, false)
         val binding = FragmentSearchBottomSheetBinding.bind(view)
@@ -25,6 +27,7 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         val controller = SearchBottomSheetController()
         binding.fragmentSearchBottomSheetRecyclerView.setController(controller)
         binding.fragmentSearchBottomSheetRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.fragmentSearchBottomSheetDone.setOnClickListener {}
 
         arguments?.get(BUNDLE_KEY_SEARCH_BOTTOM_SHEET).let {
             val arg = it as Tags
@@ -33,6 +36,10 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         dialog.setContentView(view)
+    }
+
+    fun setFilterCompleteListener(filterCompleteListener: FilterCompleteListener) {
+        this.filterCompleteListener = filterCompleteListener
     }
 
     class Builder(tags: Tags) {
@@ -50,5 +57,9 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val BUNDLE_KEY_SEARCH_BOTTOM_SHEET = "search_bottom_sheet"
+    }
+
+    interface FilterCompleteListener {
+        fun onComplete()
     }
 }

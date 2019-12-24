@@ -35,6 +35,10 @@ object TagsState {
         return this.tags
     }
 
+    fun getSelectedList(): List<Tag>? {
+        return this.tags?.filter { it.isSelected }
+    }
+
     fun clear() {
         tags = null
     }
