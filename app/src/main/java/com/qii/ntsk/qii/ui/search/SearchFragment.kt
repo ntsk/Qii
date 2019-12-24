@@ -20,6 +20,7 @@ class SearchFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         binding = FragmentSearchBinding.bind(view)
+        binding.defaultEmpty = true
         return view
     }
 

@@ -9,5 +9,6 @@
     <string name="label_tags">Tags</string>
 
     <string name="message_empty">The list could not be obtained.\nPlease try again later.</string>
+    <string name="message_search_empty">Please enter a keyword or filtering.</string>
     <string name="reload">Reload</string>
 </resources>
