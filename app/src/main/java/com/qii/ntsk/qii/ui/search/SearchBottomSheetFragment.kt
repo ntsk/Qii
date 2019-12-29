@@ -2,7 +2,6 @@ package com.qii.ntsk.qii.ui.search
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +13,10 @@ import com.qii.ntsk.qii.model.entity.Tags
 
 class SearchBottomSheetFragment : BottomSheetDialogFragment() {
     private var filterCompleteListener: FilterCompleteListener? = null
+    private lateinit var binding: FragmentSearchBottomSheetBinding
 
     override fun setupDialog(dialog: Dialog, style: Int) {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_search_bottom_sheet, null, false)
-        val binding = FragmentSearchBottomSheetBinding.bind(view)
         view.viewTreeObserver.addOnGlobalLayoutListener {
             val behavior = BottomSheetBehavior.from(view.parent as View)
             //val margin = 56 * resources.displayMetrics.density.toInt()
@@ -25,9 +24,14 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         val controller = SearchBottomSheetController()
+
+        binding = FragmentSearchBottomSheetBinding.bind(view)
         binding.fragmentSearchBottomSheetRecyclerView.setController(controller)
         binding.fragmentSearchBottomSheetRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.fragmentSearchBottomSheetDone.setOnClickListener {}
+        binding.fragmentSearchBottomSheetDone.setOnClickListener {
+            this.filterCompleteListener?.onComplete()
+            dismiss()
+        }
 
         arguments?.get(BUNDLE_KEY_SEARCH_BOTTOM_SHEET).let {
             val arg = it as Tags

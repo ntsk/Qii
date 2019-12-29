@@ -15,7 +15,7 @@ class SearchDataSource(private val scope: CoroutineScope, private val errorObser
         scope.launch {
             val response = repository.fetch(DEFAULT_PAGE, params.requestedLoadSize.toString(), query)
             val body = response.body()
-            if (response.isSuccessful && body != null) {
+            if (response.isSuccessful && body != null && body.isNotEmpty()) {
                 callback.onResult(body.toMutableList(), DEFAULT_PAGE, "2")
             } else {
                 errorObserver.postValue(response.code())
