@@ -1,6 +1,5 @@
 package com.qii.ntsk.qii.model.repository
 
-import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.service.ApiClient
 import com.qii.ntsk.qii.model.service.QiitaService

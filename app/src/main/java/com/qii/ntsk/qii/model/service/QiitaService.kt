@@ -2,6 +2,7 @@ package com.qii.ntsk.qii.model.service
 
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.Tag
+import com.qii.ntsk.qii.model.entity.Token
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -29,10 +30,10 @@ interface QiitaService {
             @Query("client_id") clientId: String,
             @Query("client_secret") clientSecret: String,
             @Query("code") code: String
-    )
+    ): Response<Token>
 
     @DELETE("access_token/{token}")
     suspend fun revokeToken(
             @Path("token") token: String
-    )
+    ): Response<Void>
 }
