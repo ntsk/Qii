@@ -62,6 +62,16 @@ class MainActivity : AppCompatActivity() {
                 .show()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+
+        val uri = intent?.data
+        if (uri != null) {
+            uri.getQueryParameter("code")
+        }
+
+        super.onNewIntent(intent)
+    }
+
     private fun <F> setDefaultFragment(fragment: F) where F : Fragment {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(FRAGMENT_ID, fragment)
