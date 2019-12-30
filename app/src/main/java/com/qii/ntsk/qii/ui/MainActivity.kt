@@ -1,21 +1,26 @@
 package com.qii.ntsk.qii
 
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
+import com.qii.ntsk.qii.ui.MainViewModel
 import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment
-import com.qii.ntsk.qii.user.UserFragment
+import com.qii.ntsk.qii.ui.user.UserFragment
 
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val FRAGMENT_ID = R.id.fragment_container
     }
+
+    private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(this.application).create(MainViewModel::class.java) }
 
     private val toolbarTitles = arrayOf("Home", "Favorite", "Search", "User")
 
