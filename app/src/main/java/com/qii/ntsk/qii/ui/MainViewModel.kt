@@ -21,6 +21,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val body = response.body()
             if (response.isSuccessful && body != null) {
                 tokenObserver.postValue(body)
+            } else {
+                errorObserver.postValue(response.code())
             }
         }
         return tokenObserver

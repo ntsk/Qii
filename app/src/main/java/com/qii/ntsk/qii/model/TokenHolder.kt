@@ -1,9 +1,10 @@
 package com.qii.ntsk.qii.model
 
 import android.content.Context
+import com.qii.ntsk.qii.QiiApp
 
-class TokenHolder(context: Context) {
-    private val sharedPreference = context.getSharedPreferences(TOKEN_PREF, Context.MODE_PRIVATE)
+class TokenHolder {
+    private val sharedPreference = QiiApp.instance.applicationContext.getSharedPreferences(TOKEN_PREF, Context.MODE_PRIVATE)
 
     companion object {
         private const val TOKEN_PREF = "token_pref"

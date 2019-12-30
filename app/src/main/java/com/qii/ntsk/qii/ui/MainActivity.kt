@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     private fun authorize(uri: Uri) {
         val code = uri.getQueryParameter("code") ?: return
         viewModel.getToken(code).observe(this, Observer {
-            val tokenHolder = TokenHolder(this)
+            val tokenHolder = TokenHolder()
             tokenHolder.save(it.token)
             Toast.makeText(this, R.string.message_success_login, Toast.LENGTH_LONG).show()
         })
