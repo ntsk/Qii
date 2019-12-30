@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/layout_please_Login_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/spacing_sub_wide"
+        android:layout_marginBottom="@dimen/spacing_wide"
+        android:src="@drawable/ic_person_accent"
+        app:layout_constraintBottom_toTopOf="@id/layout_please_login_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/layout_please_login_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_sub_wide"
+        android:gravity="center"
+        android:text="@string/message_please_login"
+        android:textSize="@dimen/text_headline"
+        android:layout_marginEnd="@dimen/spacing_ultra_wide"
+        android:layout_marginStart="@dimen/spacing_ultra_wide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/layout_please_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_accent_button"
+        android:layout_marginTop="@dimen/spacing_ultra_wide"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_headline"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_please_login_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,11 @@ class QueryBuilder {
 
         fun build(): String {
             return if (tags.isNotEmpty()) {
-                tags.map { it.id }.joinToString("OR") { "$word+AND+tag:$it" }
+                if (word.isNotEmpty()) {
+                    tags.filter { it.isSelected }.map { it.id }.joinToString("OR") { "$word+AND+tag:$it" }
+                } else {
+                    tags.filter { it.isSelected }.map { it.id }.joinToString("OR") { "tag:$it" }
+                }
             } else {
                 word
             }
