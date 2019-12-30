@@ -12,6 +12,7 @@
     <string name="label_done">Done</string>
 
     <string name="message_empty">The list could not be obtained.\nPlease try again later.</string>
+    <string name="message_please_login">Sign in now to check your personal data, favorite posts, and etc…</string>
     <string name="message_search_empty">Please enter a keyword or filtering.</string>
     <string name="message_success_login">Login success!</string>
     <string name="message_fail_login">Login failed. Please try again later.</string>

@@ -11,6 +11,7 @@ import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.utils.RandomStringGenerator
+import kotlinx.android.synthetic.main.layout_please_login.view.*
 
 class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
@@ -23,7 +24,7 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
-        binding.fragmentUserButtonLogin.setOnClickListener {
+        binding.fragmentUserLogoutView.layout_please_login_button.setOnClickListener {
             val clientId = BuildConfig.CLIENT_ID
             val scope = "read_qiita"
             val state = RandomStringGenerator.generate(40)

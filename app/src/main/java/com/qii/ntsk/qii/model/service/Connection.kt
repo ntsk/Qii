@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 object Connection {
     private val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
             .addInterceptor(AuthInterceptor())
             .build()
 

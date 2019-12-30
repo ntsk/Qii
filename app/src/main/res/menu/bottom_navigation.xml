@@ -15,7 +15,7 @@
             android:title="@string/bottom_nav_favorite" />
         <item
             android:id="@+id/nav_user"
-            android:icon="@drawable/ic_person"
+            android:icon="@drawable/ic_person_accent"
             android:title="@string/bottom_nav_user" />
     </group>
 </menu>
