@@ -12,6 +12,7 @@ class SearchController : PagedListEpoxyController<Post>() {
                 .id(item?.id)
                 .title(item?.title)
                 .description(item?.body)
+                .userImageUrl(item?.user?.profileImageUrl)
                 .date(DateFormatUtil.formatTimeAndDate(item?.created_at ?: ""))
     }
 }

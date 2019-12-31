@@ -64,7 +64,6 @@ class SearchFragment : Fragment() {
                     viewModel.search(QueryBuilder.setTags(tagList).build()).observe(viewLifecycleOwner, Observer {
                         binding.defaultEmpty = false
                         binding.showError = false
-                        binding.isLoading = false
 
                         controller.submitList(it)
                         controller.requestModelBuild()
