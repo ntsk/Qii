@@ -1,6 +1,6 @@
 package com.qii.ntsk.qii.model.service
 
-import com.qii.ntsk.qii.model.TokenHolder
+import com.qii.ntsk.qii.model.holder.TokenHolder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response

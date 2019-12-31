@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model
+package com.qii.ntsk.qii.model.holder
 
 import android.content.Context
 import com.qii.ntsk.qii.QiiApp
