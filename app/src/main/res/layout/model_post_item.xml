@@ -14,6 +14,10 @@
             type="String" />
 
         <variable
+            name="userImageUrl"
+            type="String" />
+
+        <variable
             name="date"
             type="String" />
 
@@ -24,15 +28,14 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_sub_wide">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/icon_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/colorAccent"
+            app:imageUrl="@{userImageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="30dp"
             tools:background="@color/colorAccent" />
 
         <TextView
@@ -41,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
             android:text="@{title}"
-            android:textStyle="bold"
             android:textSize="@dimen/text_sub_header"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/icon_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Design" />
@@ -67,8 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
             android:layout_marginTop="@dimen/spacing_narrow"
-            android:textSize="@dimen/text_caption"
             android:text="@{date}"
+            android:textSize="@dimen/text_caption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/post_description"
             tools:text="5days ago" />

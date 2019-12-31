@@ -22,11 +22,15 @@ object Connection {
             val token = TokenHolder().load()
             val requestBuilder = chain.request().newBuilder().url(url)
 
-            if (token != null) {
+            if (token != null && url.toString().contains(API_URL)) {
                 requestBuilder.addHeader("Authorization", "Bearer $token")
             }
 
             return chain.proceed(requestBuilder.build())
+        }
+
+        companion object {
+            private const val API_URL = "https://qiita.com/api/v2"
         }
     }
 }

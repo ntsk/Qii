@@ -59,9 +59,9 @@ class SearchFragment : Fragment() {
             val bottomSheet = SearchBottomSheetFragment.Builder(tags).build()
             bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterCompleteListener {
                 override fun onComplete() {
-                    val tags = TagsState.getList() ?: return
+                    val tagList = TagsState.getList() ?: return
                     binding.isLoading = true
-                    viewModel.search(QueryBuilder.setTags(tags).build()).observe(viewLifecycleOwner, Observer {
+                    viewModel.search(QueryBuilder.setTags(tagList).build()).observe(viewLifecycleOwner, Observer {
                         binding.defaultEmpty = false
                         binding.showError = false
                         binding.isLoading = false
