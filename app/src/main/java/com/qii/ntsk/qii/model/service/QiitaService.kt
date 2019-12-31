@@ -15,7 +15,7 @@ interface QiitaService {
     suspend fun getItems(
             @Query("page") page: String,
             @Query("per_page") per: String,
-            @Query(value = "query", encoded = false) query: String?
+            @Query(value = "query", encoded = true) query: String?
     ): Response<List<Post>>
 
     @GET("tags")

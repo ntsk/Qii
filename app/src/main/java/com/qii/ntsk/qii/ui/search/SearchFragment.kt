@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
 import com.qii.ntsk.qii.model.entity.Tags
+import com.qii.ntsk.qii.model.holder.SearchQueryHolder
 import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.utils.QueryBuilder
 
@@ -59,24 +60,32 @@ class SearchFragment : Fragment() {
             val bottomSheet = SearchBottomSheetFragment.Builder(tags).build()
             bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterCompleteListener {
                 override fun onComplete() {
-                    val tagList = TagsState.getList() ?: return
-                    binding.isLoading = true
-                    viewModel.search(QueryBuilder.setTags(tagList).build()).observe(viewLifecycleOwner, Observer {
-                        binding.defaultEmpty = false
-                        binding.showError = false
-
-                        controller.submitList(it)
-                        controller.requestModelBuild()
-                    })
-
-                    viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
-                        binding.showError = true
-                        binding.isLoading = false
-                        binding.defaultEmpty = false
-                    })
+                    showPosts()
                 }
             })
             bottomSheet.show(requireFragmentManager(), bottomSheet.tag)
         }
+    }
+
+    private fun showPosts() {
+        binding.isLoading = true
+
+        val tagList = TagsState.getList() ?: return
+        val query = QueryBuilder.setTags(tagList).build()
+
+        viewModel.search(query).observe(viewLifecycleOwner, Observer {
+            binding.defaultEmpty = false
+            binding.showError = false
+
+            controller.submitList(it)
+            controller.requestModelBuild()
+            SearchQueryHolder().save(query)
+        })
+
+        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
+            binding.showError = true
+            binding.isLoading = false
+            binding.defaultEmpty = false
+        })
     }
 }
