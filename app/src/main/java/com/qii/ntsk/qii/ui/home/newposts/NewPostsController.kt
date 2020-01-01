@@ -14,6 +14,6 @@ class NewPostsController : PagedListEpoxyController<Post>() {
                 .title(item?.title)
                 .description(item?.body)
                 .userImageUrl(item?.user?.profileImageUrl)
-                .date(DateFormatUtil.formatTimeAndDate(item?.created_at ?: ""))
+                .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))
     }
 }

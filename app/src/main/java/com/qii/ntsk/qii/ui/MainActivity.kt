@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(this.application).create(MainViewModel::class.java) }
 
-    private val toolbarTitles = arrayOf("Home", "Favorite", "Search", "User")
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,24 +33,21 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setDefaultFragment(HomeFragment())
-        binding.toolbar.title = toolbarTitles[0]
+
+        binding.toolbar.title = "Qiita"
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
-                    binding.toolbar.title = toolbarTitles[0]
                     replaceFragment(HomeFragment())
                 }
                 R.id.nav_favorite -> {
-                    binding.toolbar.title = toolbarTitles[1]
                     replaceFragment(FavoritesFragment())
                 }
                 R.id.nav_stock -> {
-                    binding.toolbar.title = toolbarTitles[2]
                     replaceFragment(SearchFragment())
                 }
                 R.id.nav_user -> {
-                    binding.toolbar.title = toolbarTitles[3]
                     replaceFragment(UserFragment())
                 }
                 else -> {

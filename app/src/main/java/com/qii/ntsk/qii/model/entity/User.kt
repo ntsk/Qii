@@ -39,6 +39,6 @@ data class User(
         @Json(name = "profile_image_url")
         val profileImageUrl: String?,
 
-        @Json(name = "website_url")
+        @Json(name = "web_site_url")
         val websiteUrl: String?
 )

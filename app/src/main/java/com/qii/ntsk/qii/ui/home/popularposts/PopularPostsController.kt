@@ -1,9 +1,11 @@
 package com.qii.ntsk.qii.ui.home.popularposts
 
+import android.view.View
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
+import com.qii.ntsk.qii.ui.CustomTabStarter
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
 class PopularPostsController : PagedListEpoxyController<Post>() {
@@ -13,6 +15,11 @@ class PopularPostsController : PagedListEpoxyController<Post>() {
                 .title(item?.title)
                 .description(item?.body)
                 .userImageUrl(item?.user?.profileImageUrl)
-                .date(DateFormatUtil.formatTimeAndDate(item?.created_at ?: ""))
+                .clickListener(View.OnClickListener {
+                    if (item?.url != null) {
+                        CustomTabStarter.start(it.context, item.url)
+                    }
+                })
+                .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))
     }
 }
