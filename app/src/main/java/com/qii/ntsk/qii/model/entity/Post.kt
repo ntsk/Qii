@@ -2,6 +2,7 @@ package com.qii.ntsk.qii.model.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Post(
@@ -27,4 +28,4 @@ data class Post(
         val tags: List<Tag>?,
         val user: User?,
         val url: String?
-)
+): Serializable

@@ -5,7 +5,8 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.ui.CustomTabStarter
+import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.ui.PostDetailFragment
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
 class PopularPostsController : PagedListEpoxyController<Post>() {
@@ -17,7 +18,9 @@ class PopularPostsController : PagedListEpoxyController<Post>() {
                 .userImageUrl(item?.user?.profileImageUrl)
                 .clickListener(View.OnClickListener {
                     if (item?.url != null) {
-                        CustomTabStarter.start(it.context, item.url)
+                        val activity = it.context as MainActivity
+                        val fragment = PostDetailFragment.Builder(item).build()
+                        activity.replaceFragment(fragment)
                     }
                 })
                 .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))
