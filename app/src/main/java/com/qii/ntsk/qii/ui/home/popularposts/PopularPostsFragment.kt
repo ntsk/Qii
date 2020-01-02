@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
+import com.qii.ntsk.qii.model.state.Status
 
 class PopularPostsFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(PopularPostsViewModel::class.java) }
@@ -39,15 +40,33 @@ class PopularPostsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.isLoading = true
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
-            controller.requestModelBuild()
         })
 
-        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
-            binding.showError = true
-            binding.isLoading = false
+        viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.showError = false
+                    binding.isLoading = true
+                    controller.isLoading = false
+                }
+                Status.PAGING -> {
+                    binding.showError = false
+                    binding.isLoading = false
+                    controller.isLoading = true
+                }
+                Status.SUCCESS -> {
+                    binding.showError = false
+                    binding.isLoading = false
+                    controller.isLoading = false
+                }
+                Status.FAILED -> {
+                    binding.showError = true
+                    binding.isLoading = false
+                    controller.isLoading = false
+                }
+            }
         })
     }
 }
