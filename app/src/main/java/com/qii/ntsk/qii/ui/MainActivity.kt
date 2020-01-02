@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home -> {
                     replaceFragment(homeFragment)
                 }
+                R.id.nav_search -> {
+                    replaceFragment(searchFragment)
+                }
                 R.id.nav_favorite -> {
                     replaceFragment(favoritesFragment)
-                }
-                R.id.nav_stock -> {
-                    replaceFragment(searchFragment)
                 }
                 R.id.nav_user -> {
                     replaceFragment(userFragment)
