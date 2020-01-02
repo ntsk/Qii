@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    private fun <F> replaceFragment(fragment: F): Boolean where F : Fragment {
+    fun <F> replaceFragment(fragment: F): Boolean where F : Fragment {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(FRAGMENT_ID, fragment)
         transaction.addToBackStack(null)
