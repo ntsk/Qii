@@ -10,6 +10,7 @@ import androidx.paging.PagedList
 import com.qii.ntsk.qii.model.datasource.PopularPostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.state.NetworkState
+import com.qii.ntsk.qii.model.state.Status
 
 class PopularPostsViewModel(app: Application) : AndroidViewModel(app) {
     var popularPostsObserver: LiveData<PagedList<Post>> = MutableLiveData()

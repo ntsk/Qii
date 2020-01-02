@@ -23,49 +23,29 @@ class PopularPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_popular_posts, container, false)
         binding = FragmentPopularPostsBinding.bind(view)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         val recyclerView = binding.fragmentPopularPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
-        controller.addModelBuildListener {
-            if (binding.isLoading) {
-                binding.isLoading = false
-                recyclerView.scheduleLayoutAnimation()
-            }
-        }
+        recyclerView.scheduleLayoutAnimation()
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
         })
 
         viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {
             when (it.status) {
-                Status.LOADING -> {
-                    binding.showError = false
-                    binding.isLoading = true
-                    controller.isLoading = false
-                }
                 Status.PAGING -> {
-                    binding.showError = false
-                    binding.isLoading = false
                     controller.isLoading = true
                 }
-                Status.SUCCESS -> {
-                    binding.showError = false
-                    binding.isLoading = false
-                    controller.isLoading = false
-                }
-                Status.FAILED -> {
-                    binding.showError = true
-                    binding.isLoading = false
-                    controller.isLoading = false
-                }
+                else -> controller.isLoading = false
             }
         })
     }
