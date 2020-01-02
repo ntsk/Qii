@@ -26,7 +26,6 @@ class SearchFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         binding = FragmentSearchBinding.bind(view)
-        binding.defaultEmpty = true
 
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
@@ -37,6 +36,9 @@ class SearchFragment : Fragment() {
                 binding.isLoading = false
                 recyclerView.scheduleLayoutAnimation()
             }
+        }
+        if (controller.adapter.itemCount == 0) {
+            binding.defaultEmpty = true
         }
         return view
     }

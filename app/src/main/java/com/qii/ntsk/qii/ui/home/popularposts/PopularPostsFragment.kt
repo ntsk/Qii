@@ -22,7 +22,6 @@ class PopularPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_popular_posts, container, false)
         binding = FragmentPopularPostsBinding.bind(view)
-        binding.isLoading = true
 
         val recyclerView = binding.fragmentPopularPostsRecyclerView
         recyclerView.setController(controller)
@@ -39,6 +38,8 @@ class PopularPostsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        binding.isLoading = true
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()

@@ -3,6 +3,9 @@ package com.qii.ntsk.qii.ui
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -37,6 +40,24 @@ class PostDetailFragment : Fragment() {
         binding.fragmentPostDetailWebView.webViewClient = client
         binding.fragmentPostDetailWebView.loadUrl(post.url)
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val activity = activity as MainActivity
+        activity.showSupportActionBar()
+        activity.hideBottomNavigation()
+        setHasOptionsMenu(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            fragmentManager?.popBackStack()
+            val activity = activity as MainActivity
+            activity.hideSupportActionBar()
+            activity.showBottomNavigation()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     class Builder(post: Post) {
