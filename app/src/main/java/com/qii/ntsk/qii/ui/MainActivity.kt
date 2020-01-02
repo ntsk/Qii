@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
+import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.holder.TokenHolder
 import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment
@@ -111,12 +112,17 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun <F> replaceFragment(fragment: F): Boolean where F : Fragment {
+    private fun <F> replaceFragment(fragment: F): Boolean where F : Fragment {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(FRAGMENT_ID, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
         return true
+    }
+
+    fun showPostDetail(post: Post) {
+        val fragment = PostDetailFragment.Builder(post).build()
+        replaceFragment(fragment)
     }
 
     fun showSupportActionBar() {

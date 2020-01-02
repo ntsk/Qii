@@ -20,8 +20,7 @@ class NewPostsController : PagedListEpoxyController<Post>() {
                 .clickListener(View.OnClickListener {
                     if (item?.url != null) {
                         val activity = it.context as MainActivity
-                        val fragment = PostDetailFragment.Builder(item).build()
-                        activity.replaceFragment(fragment)
+                        activity.showPostDetail(item)
                     }
                 })
                 .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))
