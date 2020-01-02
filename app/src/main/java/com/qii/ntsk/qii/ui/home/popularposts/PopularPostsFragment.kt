@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,8 +28,6 @@ class PopularPostsFragment : Fragment() {
         val recyclerView = binding.fragmentPopularPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
-        recyclerView.scheduleLayoutAnimation()
         return view
     }
 
