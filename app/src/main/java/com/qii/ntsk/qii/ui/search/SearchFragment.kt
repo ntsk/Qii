@@ -32,6 +32,10 @@ class SearchFragment : Fragment() {
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+
+        if (recyclerView.adapter?.itemCount == 0) {
+            binding.defaultEmpty = true
+        }
         return view
     }
 
@@ -66,12 +70,12 @@ class SearchFragment : Fragment() {
         val query = QueryBuilder.setTags(tagList).build()
 
         viewModel.search(query).observe(viewLifecycleOwner, Observer {
+            binding.defaultEmpty = false
             controller.submitList(it)
             SearchQueryHolder().save(query)
         })
 
         viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {
-            binding.defaultEmpty = false
             when (it.status) {
                 Status.PAGING -> {
                     controller.isLoading = true

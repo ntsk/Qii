@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
+import com.qii.ntsk.qii.model.holder.TokenHolder
 import com.qii.ntsk.qii.utils.RandomStringGenerator
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 
@@ -24,6 +25,14 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
+        if (TokenHolder().load() == null) {
+            showLogoutView()
+            return
+        }
+    }
+
+    private fun showLogoutView() {
+        binding.fragmentUserLogoutView.visibility = View.VISIBLE
         binding.fragmentUserLogoutView.layout_please_login_button.setOnClickListener {
             val clientId = BuildConfig.CLIENT_ID
             val scope = "read_qiita"

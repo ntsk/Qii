@@ -147,4 +147,8 @@ class MainActivity : AppCompatActivity() {
     fun hideBottomNavigation() {
         binding.bottomNavigation.visibility = View.GONE
     }
+
+    fun setToolbarTitle(title: String) {
+        binding.toolbar.title = title
+    }
 }
