@@ -1,10 +1,8 @@
-package com.qii.ntsk.qii.ui
+package com.qii.ntsk.qii.ui.detail
 
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPostDetailBinding
 import com.qii.ntsk.qii.model.entity.Post
+import com.qii.ntsk.qii.ui.MainActivity
 
 class PostDetailFragment : Fragment() {
     private lateinit var binding: FragmentPostDetailBinding

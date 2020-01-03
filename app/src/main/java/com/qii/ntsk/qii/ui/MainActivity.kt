@@ -16,6 +16,7 @@ import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.favorite.FavoritesFragment
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.holder.TokenHolder
+import com.qii.ntsk.qii.ui.detail.PostDetailFragment
 import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment
 import com.qii.ntsk.qii.ui.user.UserFragment
