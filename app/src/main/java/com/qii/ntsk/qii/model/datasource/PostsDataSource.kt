@@ -5,32 +5,41 @@ import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.repository.PostsRepository
+import com.qii.ntsk.qii.model.state.NetworkState
+import com.qii.ntsk.qii.model.state.Status
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class SearchDataSource(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>, private val query: String) : PageKeyedDataSource<String, Post>() {
+class PostsDataSource(
+        private val scope: CoroutineScope,
+        private val networkStateObserver: MutableLiveData<NetworkState>,
+        private val query: String?
+) : PageKeyedDataSource<String, Post>() {
     private val repository = PostsRepository()
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
+        networkStateObserver.postValue(NetworkState(status = Status.LOADING))
         scope.launch {
             val response = repository.fetch(DEFAULT_PAGE, params.requestedLoadSize.toString(), query)
             val body = response.body()
             if (response.isSuccessful && body != null && body.isNotEmpty()) {
+                networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
                 callback.onResult(body.toMutableList(), DEFAULT_PAGE, "2")
             } else {
-                errorObserver.postValue(response.code())
+                networkStateObserver.postValue(NetworkState(status = Status.FAILED, responseCode = response.code()))
             }
         }
     }
 
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Post>) {
-
+        networkStateObserver.postValue(NetworkState(status = Status.PAGING))
         scope.launch {
             val response = repository.fetch(params.key, params.requestedLoadSize.toString(), query)
             val body = response.body()
             var currentPage = params.key.toInt()
 
             if (response.isSuccessful && body != null) {
+                networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
                 currentPage++
                 callback.onResult(body.toMutableList(), currentPage.toString())
             } else {
@@ -43,9 +52,12 @@ class SearchDataSource(private val scope: CoroutineScope, private val errorObser
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope, private val errorObserver: MutableLiveData<Int>, private val query: String) : DataSource.Factory<String, Post>() {
+    class Factory(private val scope: CoroutineScope,
+                  private val networkStateObserver: MutableLiveData<NetworkState>,
+                  private val query: String?
+    ) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return SearchDataSource(scope, errorObserver, query)
+            return PostsDataSource(scope, networkStateObserver, query)
         }
     }
 

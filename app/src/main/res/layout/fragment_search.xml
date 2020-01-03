@@ -9,14 +9,12 @@
             type="boolean" />
 
         <variable
-            name="isLoading"
-            type="boolean" />
-
-        <variable
-            name="showError"
-            type="boolean" />
+            name="viewModel"
+            type="com.qii.ntsk.qii.ui.search.SearchViewModel" />
 
         <import type="android.view.View" />
+
+        <import type="com.qii.ntsk.qii.model.state.Status" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +25,6 @@
             android:id="@+id/fragment_search_posts_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{isLoading || defaultEmpty || showError ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,14 +47,14 @@
         <include
             android:id="@+id/fragment_search_empty"
             layout="@layout/view_empty"
-            android:visibility="@{showError ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{viewModel.networkStateObserver.status == Status.FAILED ? View.VISIBLE : View.GONE}" />
 
         <include
             android:id="@+id/fragment_search_loading"
             layout="@layout/view_loading_dots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.networkStateObserver.status == Status.LOADING ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

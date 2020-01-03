@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.qii.ntsk.qii.model.datasource.PopularPostsDataSource
+import com.qii.ntsk.qii.model.datasource.PostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.state.NetworkState
 
@@ -20,7 +20,7 @@ class PopularPostsViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun load() {
-        val factory = PopularPostsDataSource.Factory(viewModelScope, networkStateObserver)
+        val factory = PostsDataSource.Factory(viewModelScope, networkStateObserver, "stock:>30")
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)

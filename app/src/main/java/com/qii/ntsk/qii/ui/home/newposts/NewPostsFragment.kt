@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentNewPostsBinding
+import com.qii.ntsk.qii.model.state.Status
 
 class NewPostsFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(NewPostsViewModel::class.java) }
@@ -22,18 +23,11 @@ class NewPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_new_posts, container, false)
         binding = FragmentNewPostsBinding.bind(view)
-        binding.isLoading = true
 
         val recyclerView = binding.fragmentNewPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
-        controller.addModelBuildListener {
-            if (binding.isLoading) {
-                binding.isLoading = false
-                recyclerView.scheduleLayoutAnimation()
-            }
-        }
         return view
     }
 
@@ -44,9 +38,13 @@ class NewPostsFragment : Fragment() {
             controller.requestModelBuild()
         })
 
-        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
-            binding.showError = true
-            binding.isLoading = false
+        viewModel.netWorkStateObserver.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.PAGING -> {
+                    controller.isLoading = true
+                }
+                else -> controller.isLoading = false
+            }
         })
     }
 }

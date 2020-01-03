@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,7 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.holder.SearchQueryHolder
+import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.utils.QueryBuilder
 
@@ -26,20 +26,12 @@ class SearchFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         binding = FragmentSearchBinding.bind(view)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
-        controller.addModelBuildListener {
-            if (binding.isLoading) {
-                binding.isLoading = false
-                recyclerView.scheduleLayoutAnimation()
-            }
-        }
-        if (controller.adapter.itemCount == 0) {
-            binding.defaultEmpty = true
-        }
         return view
     }
 
@@ -70,24 +62,22 @@ class SearchFragment : Fragment() {
     }
 
     private fun showPosts() {
-        binding.isLoading = true
-
         val tagList = TagsState.getList() ?: return
         val query = QueryBuilder.setTags(tagList).build()
 
         viewModel.search(query).observe(viewLifecycleOwner, Observer {
-            binding.defaultEmpty = false
-            binding.showError = false
-
             controller.submitList(it)
-            controller.requestModelBuild()
             SearchQueryHolder().save(query)
         })
 
-        viewModel.errorObserver.observe(viewLifecycleOwner, Observer {
-            binding.showError = true
-            binding.isLoading = false
+        viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {
             binding.defaultEmpty = false
+            when (it.status) {
+                Status.PAGING -> {
+                    controller.isLoading = true
+                }
+                else -> controller.isLoading = false
+            }
         })
     }
 }
