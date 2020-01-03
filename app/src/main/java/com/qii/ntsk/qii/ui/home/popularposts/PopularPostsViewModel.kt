@@ -10,7 +10,6 @@ import androidx.paging.PagedList
 import com.qii.ntsk.qii.model.datasource.PopularPostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.state.NetworkState
-import com.qii.ntsk.qii.model.state.Status
 
 class PopularPostsViewModel(app: Application) : AndroidViewModel(app) {
     var popularPostsObserver: LiveData<PagedList<Post>> = MutableLiveData()
@@ -23,8 +22,9 @@ class PopularPostsViewModel(app: Application) : AndroidViewModel(app) {
     private fun load() {
         val factory = PopularPostsDataSource.Factory(viewModelScope, networkStateObserver)
         val config = PagedList.Config.Builder()
-                .setInitialLoadSizeHint(10)
-                .setPageSize(10)
+                .setInitialLoadSizeHint(20)
+                .setPageSize(20)
+                .setPrefetchDistance(40)
                 .setMaxSize(100)
                 .build()
         popularPostsObserver = LivePagedListBuilder(factory, config).build()
