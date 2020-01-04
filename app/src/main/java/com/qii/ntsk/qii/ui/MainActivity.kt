@@ -36,10 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
-        binding.toolbar.title = "Qiita"
-        setSupportActionBar(toolbar)
-
         val homeFragment = HomeFragment()
         val favoritesFragment = FavoritesFragment()
         val searchFragment = SearchFragment()
@@ -71,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(FRAGMENT_ID)
         if (currentFragment is PostDetailFragment) {
             supportFragmentManager.popBackStack()
-            hideSupportActionBar()
             showBottomNavigation()
             return
         }
@@ -126,29 +121,11 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(fragment)
     }
 
-    fun showSupportActionBar() {
-        supportActionBar?.let {
-            it.setHomeButtonEnabled(true)
-            it.setDisplayHomeAsUpEnabled(true)
-        }
-    }
-
-    fun hideSupportActionBar() {
-        supportActionBar?.let {
-            it.setHomeButtonEnabled(false)
-            it.setDisplayHomeAsUpEnabled(false)
-        }
-    }
-
     fun showBottomNavigation() {
         binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     fun hideBottomNavigation() {
         binding.bottomNavigation.visibility = View.GONE
-    }
-
-    fun setToolbarTitle(title: String) {
-        binding.toolbar.title = title
     }
 }

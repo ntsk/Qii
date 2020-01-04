@@ -3,7 +3,6 @@ package com.qii.ntsk.qii.ui.detail
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -23,6 +22,13 @@ class PostDetailFragment : Fragment() {
         binding = FragmentPostDetailBinding.bind(view)
 
         val post = arguments?.get(BUNDLE_KEY_POST_DETAIL) as? Post ?: return view
+        binding.fragmentPostDetailToolbar.title = post.title
+        binding.fragmentPostDetailToolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.fragmentPostDetailToolbar.setNavigationOnClickListener {
+            fragmentManager?.popBackStack()
+            val activity = activity as MainActivity
+            activity.showBottomNavigation()
+        }
 
         val client = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -44,19 +50,7 @@ class PostDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = activity as MainActivity
-        activity.showSupportActionBar()
         activity.hideBottomNavigation()
-        setHasOptionsMenu(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            fragmentManager?.popBackStack()
-            val activity = activity as MainActivity
-            activity.hideSupportActionBar()
-            activity.showBottomNavigation()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     class Builder(post: Post) {
