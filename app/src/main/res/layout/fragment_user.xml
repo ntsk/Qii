@@ -2,6 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.qii.ntsk.qii.ui.user.UserViewModel" />
+
+        <variable
+            name="iconUrl"
+            type="String" />
+
+        <import type="android.view.View" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -9,6 +22,8 @@
         <include
             android:id="@+id/fragment_user_login_view"
             layout="@layout/layout_user_login"
+            android:visibility="@{viewModel.loginStateLiveData.booleanValue() ? View.VISIBLE : View.GONE}"
+            app:iconUrl="@{iconUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -16,7 +31,7 @@
         <include
             android:id="@+id/fragment_user_logout_view"
             layout="@layout/layout_please_login"
-            android:visibility="gone"
+            android:visibility="@{viewModel.loginStateLiveData.booleanValue() ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

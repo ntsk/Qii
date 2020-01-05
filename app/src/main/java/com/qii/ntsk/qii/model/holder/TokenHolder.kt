@@ -18,4 +18,8 @@ class TokenHolder {
     fun load(): String? {
         return sharedPreference.getString(TOKEN_PREF_KEY, null)
     }
+
+    fun delete() {
+        val editor = sharedPreference.edit().remove(TOKEN_PREF_KEY).apply()
+    }
 }

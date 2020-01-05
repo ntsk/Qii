@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="iconUrl"
+            type="String" />
+
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -33,10 +41,10 @@
                         android:id="@+id/layout_user_login_image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_gravity="center"
+                        android:layout_marginTop="70dp"
                         android:scaleType="centerCrop"
                         android:src="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:imageUrl="@{iconUrl}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -49,16 +57,29 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_headline"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/layout_user_login_description"
+                        app:layout_constraintBottom_toTopOf="@id/layout_user_login_user_id"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layout_user_login_image"
                         tools:text="ntsk" />
 
                     <TextView
+                        android:id="@+id/layout_user_login_user_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_sub_header"
+                        app:layout_constraintBottom_toTopOf="@id/layout_user_login_description"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_user_login_user_name"
+                        tools:text="ntsk" />
+
+                    <TextView
                         android:id="@+id/layout_user_login_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sub_medium"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

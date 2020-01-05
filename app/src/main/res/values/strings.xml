@@ -18,6 +18,7 @@
 
     <string name="reload">Reload</string>
     <string name="login">Login</string>
+    <string name="id_with_at">\@%s</string>
 
     <string name="long_text">If you have used FrameLayout in your application, then you know that it is a very difficult task to manage views one over the other in FrameLayout. Also, it is advised not to use more than one element in our FrameLayout. The reason behind this is, you have to explicitly handle the motions or you may say the animations of all the views that are present on a particular page of your mobile application.
 

@@ -3,6 +3,7 @@ package com.qii.ntsk.qii.model.service
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Token
+import com.qii.ntsk.qii.model.entity.User
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -36,4 +37,7 @@ interface QiitaService {
     suspend fun revokeToken(
             @Path("token") token: String
     ): Response<Void>
+
+    @GET("authenticated_user")
+    suspend fun getAuthenticatedUser(): Response<User>
 }
