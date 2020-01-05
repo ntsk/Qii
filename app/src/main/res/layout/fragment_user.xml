@@ -6,14 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Toolbar
-            android:id="@+id/fragment_user_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:elevation="4dp"
-            android:title="@string/bottom_nav_user"
-            android:titleTextColor="@color/white"
+        <include
+            android:id="@+id/fragment_user_login_view"
+            layout="@layout/layout_user_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -21,9 +16,10 @@
         <include
             android:id="@+id/fragment_user_logout_view"
             layout="@layout/layout_please_login"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_user_toolbar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
