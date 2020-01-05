@@ -46,4 +46,10 @@
         <item name="android:background">@drawable/search_bottom_sheet_background</item>
     </style>
 
+    <style name="HomeTabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
 </resources>
