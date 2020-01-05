@@ -40,7 +40,7 @@
 
         <include
             android:id="@+id/fragment_popular_posts_empty"
-            layout="@layout/view_empty"
+            layout="@layout/layout_empty"
             android:visibility="@{viewModel.networkStateObserver.status == Status.FAILED ? View.VISIBLE : View.GONE}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
