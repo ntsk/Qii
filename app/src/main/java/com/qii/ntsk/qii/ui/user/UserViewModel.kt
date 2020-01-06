@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.qii.ntsk.qii.model.datasource.AuthenticatedUserItemsDataSource
 import com.qii.ntsk.qii.model.datasource.PostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
@@ -23,9 +24,9 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     private var userPostsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
 
-    private val userPostsNetWorkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
-
     private val userRepository = UserRepository()
+
+    val userPostsNetWorkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
 
     init {
         if (TokenHolder().load() != null) {
@@ -47,7 +48,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     internal fun fetchAuthenticatedUserItems(): LiveData<PagedList<Post>> {
-        val factory = PostsDataSource.Factory(viewModelScope, userPostsNetWorkStateObserver)
+        val factory = AuthenticatedUserItemsDataSource.Factory(viewModelScope, userPostsNetWorkStateObserver)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)

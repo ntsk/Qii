@@ -42,5 +42,8 @@ interface QiitaService {
     suspend fun getAuthenticatedUser(): Response<User>
 
     @GET("authenticated_user/items")
-    suspend fun getAuthenticatedUserItems(): Response<List<Post>>
+    suspend fun getAuthenticatedUserItems(
+            @Query("page") page: String,
+            @Query("per_page") per: String
+    ): Response<List<Post>>
 }

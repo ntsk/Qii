@@ -11,7 +11,7 @@ class UserRepository {
         return ApiClient.create(QiitaService::class.java).getAuthenticatedUser()
     }
 
-    suspend fun getAuthenticatedUserItems(): Response<List<Post>> {
-        return ApiClient.create(QiitaService::class.java).getAuthenticatedUserItems()
+    suspend fun getAuthenticatedUserItems(page: Int, perPage: Int): Response<List<Post>> {
+        return ApiClient.create(QiitaService::class.java).getAuthenticatedUserItems(page.toString(), perPage.toString())
     }
 }
