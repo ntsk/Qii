@@ -22,7 +22,7 @@
         android:layout_height="match_parent">
 
         <Toolbar
-            android:id="@+id/fragment_user_toolbar"
+            android:id="@+id/fragment_search_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_search_posts_fab"
@@ -54,12 +54,20 @@
         <include
             android:id="@+id/fragment_search_default_empty"
             layout="@layout/view_search_empty"
-            android:visibility="@{defaultEmpty ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{defaultEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
 
         <include
             android:id="@+id/fragment_search_empty"
             layout="@layout/layout_empty"
-            android:visibility="@{viewModel.networkStateObserver.status == Status.FAILED ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{viewModel.networkStateObserver.status == Status.FAILED ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
 
         <include
             android:id="@+id/fragment_search_loading"
@@ -70,7 +78,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
