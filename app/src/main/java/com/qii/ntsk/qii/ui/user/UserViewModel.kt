@@ -1,12 +1,15 @@
 package com.qii.ntsk.qii.ui.user
 
 import android.app.Application
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.model.datasource.AuthenticatedUserItemsDataSource
 import com.qii.ntsk.qii.model.datasource.PostsDataSource
 import com.qii.ntsk.qii.model.entity.Post
@@ -14,6 +17,7 @@ import com.qii.ntsk.qii.model.entity.User
 import com.qii.ntsk.qii.model.holder.TokenHolder
 import com.qii.ntsk.qii.model.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
+import com.qii.ntsk.qii.utils.RandomStringGenerator
 import kotlinx.coroutines.launch
 
 class UserViewModel(app: Application) : AndroidViewModel(app) {
@@ -58,7 +62,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         return userPostsLiveData
     }
 
-    internal fun logout() {
+    internal fun deleteToken() {
         TokenHolder().delete()
         loginStateLiveData.postValue(false)
     }

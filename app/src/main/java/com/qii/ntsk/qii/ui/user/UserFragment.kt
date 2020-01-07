@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,21 +42,36 @@ class UserFragment : Fragment() {
     }
 
     private fun showLogoutView() {
-        binding.fragmentUserLogoutView.visibility = View.VISIBLE
-        binding.fragmentUserLogoutView.layout_please_login_button.setOnClickListener {
-            val clientId = BuildConfig.CLIENT_ID
-            val scope = "read_qiita"
-            val state = RandomStringGenerator.generate(40)
+        binding.fragmentUserLogoutView.layoutUserLogoutEmpty.layout_please_login_button.setOnClickListener {
+            login()
+        }
 
-            val uri = "https://qiita.com/api/v2/oauth/authorize?client_id=$clientId&scope=$scope&state=$state"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            startActivity(intent)
+        val toolbar = binding.fragmentUserLogoutView.layoutUserLogoutToolbar
+        toolbar.inflateMenu(R.menu.menu_user_login)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.login -> {
+                    login()
+                    true
+                }
+                else -> false
+            }
         }
     }
 
     private fun showLoginView() {
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
+        binding.fragmentUserLoginView.layoutUserLoginToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.logout -> {
+                    logout()
+                    true
+                }
+                else -> false
+            }
+        }
 
         viewModel.fetchAuthenticatedUser().observe(viewLifecycleOwner, Observer {
             binding.iconUrl = it.profileImageUrl
@@ -74,5 +91,27 @@ class UserFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
+    }
+
+    private fun login() {
+        val clientId = BuildConfig.CLIENT_ID
+        val scope = "read_qiita"
+        val state = RandomStringGenerator.generate(40)
+
+        val uri = "https://qiita.com/api/v2/oauth/authorize?client_id=$clientId&scope=$scope&state=$state"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        startActivity(intent)
+    }
+
+    private fun logout() {
+        AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes") { _, _ ->
+                    viewModel.deleteToken()
+                    Toast.makeText(context, R.string.message_success_logout, Toast.LENGTH_LONG).show()
+                }
+                .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
+                .show()
     }
 }
