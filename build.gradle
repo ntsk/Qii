@@ -3,7 +3,7 @@ buildscript {
     ext.supportLibVersion = '28.0.0'
     ext.materialVersion = '1.0.0'
     ext.supportLibVersion = '1.0.0'
-    ext.epoxyVersion = '3.8.0'
+    ext.epoxyVersion = '3.9.0'
     ext.retrofitVersion = '2.7.1'
     ext.moshiVersion = '1.9.2'
     ext.okhttpVersion = '3.14.4'
