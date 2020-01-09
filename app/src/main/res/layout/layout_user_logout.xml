@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:elevation="4dp"
+            android:theme="@style/NoActionBarTheme"
             android:title="@string/bottom_nav_user"
             android:titleTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
