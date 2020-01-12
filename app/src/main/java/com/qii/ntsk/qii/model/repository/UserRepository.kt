@@ -14,4 +14,8 @@ class UserRepository {
     suspend fun getAuthenticatedUserItems(page: Int, perPage: Int): Response<List<Post>> {
         return ApiClient.create(QiitaService::class.java).getAuthenticatedUserItems(page.toString(), perPage.toString())
     }
+
+    suspend fun getStocks(userId: String, page: Int, perPage: Int): Response<List<Post>> {
+        return ApiClient.create(QiitaService::class.java).getUserStocks(userId, page.toString(), perPage.toString())
+    }
 }

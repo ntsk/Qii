@@ -60,6 +60,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
+        binding.bottomNavigation.menu.findItem(R.id.nav_home).isChecked = true
     }
 
     override fun onBackPressed() {
@@ -116,13 +118,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun reloadViews() {
+    fun reloadViews() {
         val currentFragment = supportFragmentManager.findFragmentById(FRAGMENT_ID)
         if (currentFragment != null) {
             supportFragmentManager.beginTransaction().remove(currentFragment).commit()
         }
         recreate()
-        binding.bottomNavigation.selectedItemId = R.id.home_tab
     }
 
     fun showPostDetail(post: Post) {

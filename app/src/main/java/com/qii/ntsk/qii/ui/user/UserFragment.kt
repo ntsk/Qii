@@ -17,6 +17,8 @@ import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import com.qii.ntsk.qii.utils.RandomStringGenerator
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 
@@ -94,13 +96,7 @@ class UserFragment : Fragment() {
     }
 
     private fun login() {
-        val clientId = BuildConfig.CLIENT_ID
-        val scope = "read_qiita"
-        val state = RandomStringGenerator.generate(40)
-
-        val uri = "https://qiita.com/api/v2/oauth/authorize?client_id=$clientId&scope=$scope&state=$state"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-        startActivity(intent)
+        startActivity(LoginIntentBuilder.build())
     }
 
     private fun logout() {
@@ -110,6 +106,8 @@ class UserFragment : Fragment() {
                 .setPositiveButton("Yes") { _, _ ->
                     viewModel.deleteToken()
                     Toast.makeText(context, R.string.message_success_logout, Toast.LENGTH_LONG).show()
+                    val activity = activity as MainActivity
+                    activity.reloadViews()
                 }
                 .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
                 .show()

@@ -38,6 +38,13 @@ interface QiitaService {
             @Path("token") token: String
     ): Response<Void>
 
+    @GET("users/{userId}/stocks")
+    suspend fun getUserStocks(
+            @Path("userId") userId: String,
+            @Query("page") page: String,
+            @Query("per_page") per: String
+    ): Response<List<Post>>
+
     @GET("authenticated_user")
     suspend fun getAuthenticatedUser(): Response<User>
 
