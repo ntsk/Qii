@@ -96,7 +96,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/colorAccent"
                     android:theme="@style/NoActionBarTheme"
-                    android:title="@string/bottom_nav_user"
+                    android:title="@string/user"
                     app:layout_collapseMode="pin" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
-import com.qii.ntsk.qii.ui.favorite.FavoritesFragment
+import com.qii.ntsk.qii.ui.stocks.StocksFragment
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.holder.TokenHolder
 import com.qii.ntsk.qii.ui.detail.PostDetailFragment
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val homeFragment = HomeFragment()
-        val favoritesFragment = FavoritesFragment()
+        val stocksFragment = StocksFragment()
         val searchFragment = SearchFragment()
         val userFragment = UserFragment()
 
@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_search -> {
                     replaceFragment(searchFragment)
                 }
-                R.id.nav_favorite -> {
-                    replaceFragment(favoritesFragment)
+                R.id.nav_stocks -> {
+                    replaceFragment(stocksFragment)
                 }
                 R.id.nav_user -> {
                     replaceFragment(userFragment)

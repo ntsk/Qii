@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:elevation="4dp"
-                android:title="@string/bottom_nav_home"
+                android:title="@string/home"
                 android:titleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|enterAlways" />
 

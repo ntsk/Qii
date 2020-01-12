@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:elevation="4dp"
-            android:title="@string/bottom_nav_search"
+            android:title="@string/search"
             android:titleTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

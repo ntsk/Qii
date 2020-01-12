@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.ui.favorite
+package com.qii.ntsk.qii.ui.stocks
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
@@ -9,7 +9,7 @@ import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
-class FavoritesController : PagedListEpoxyController<Post>() {
+class StocksController : PagedListEpoxyController<Post>() {
     var isLoading = false
         set(value) {
             field = value
