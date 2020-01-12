@@ -93,9 +93,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.getToken(code).observe(this, Observer {
             val tokenHolder = TokenHolder()
             tokenHolder.save(it.token)
-            replaceFragment(UserFragment())
-            binding.bottomNavigation.selectedItemId = R.id.nav_user
             Toast.makeText(this, R.string.message_success_login, Toast.LENGTH_LONG).show()
+            reloadViews()
         })
 
         viewModel.errorObserver.observe(this, Observer {
@@ -116,6 +115,15 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
         return true
+    }
+
+    private fun reloadViews() {
+        val currentFragment = supportFragmentManager.findFragmentById(FRAGMENT_ID)
+        if (currentFragment != null) {
+            supportFragmentManager.beginTransaction().remove(currentFragment).commit()
+        }
+        recreate()
+        binding.bottomNavigation.selectedItemId = R.id.home_tab
     }
 
     fun showPostDetail(post: Post) {
