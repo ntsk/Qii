@@ -13,14 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
-import com.qii.ntsk.qii.favorite.FavoritesFragment
+import com.qii.ntsk.qii.ui.favorite.FavoritesFragment
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.holder.TokenHolder
 import com.qii.ntsk.qii.ui.detail.PostDetailFragment
 import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment
 import com.qii.ntsk.qii.ui.user.UserFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
