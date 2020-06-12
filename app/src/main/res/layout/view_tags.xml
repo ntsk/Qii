@@ -10,8 +10,7 @@
             android:id="@+id/view_tags_chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_sub_medium"
-            app:chipSpacingHorizontal="@dimen/spacing_sub_medium"
-            app:chipSpacingVertical="@dimen/spacing_sub_medium" />
+            app:chipSpacingHorizontal="@dimen/spacing_sub_narrow"
+            app:chipSpacingVertical="0dp" />
     </FrameLayout>
 </layout>

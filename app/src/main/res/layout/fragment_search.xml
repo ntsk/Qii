@@ -56,7 +56,9 @@
             android:layout_margin="@dimen/spacing_sub_wide"
             android:src="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white" />
 
         <include
             android:id="@+id/fragment_search_default_empty"
