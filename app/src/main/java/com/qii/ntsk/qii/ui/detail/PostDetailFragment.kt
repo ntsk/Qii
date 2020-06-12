@@ -23,7 +23,7 @@ class PostDetailFragment : Fragment() {
 
         val post = arguments?.get(BUNDLE_KEY_POST_DETAIL) as? Post ?: return view
         binding.fragmentPostDetailToolbar.title = post.title
-        binding.fragmentPostDetailToolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.fragmentPostDetailToolbar.setNavigationIcon(R.drawable.ic_arrow)
         binding.fragmentPostDetailToolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStack()
             val activity = activity as MainActivity

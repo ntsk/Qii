@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/white</item>
         <item name="bottomSheetDialogTheme">@style/SearchBottomSheetTheme</item>
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
         <item name="chipGroupStyle">@style/Widget.MaterialComponents.ChipGroup</item>
@@ -53,5 +52,4 @@
     <style name="SearchBottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/search_bottom_sheet_background</item>
     </style>
-
 </resources>
