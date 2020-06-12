@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentHomeBinding
 import com.qii.ntsk.qii.ui.home.newposts.NewPostsFragment
@@ -24,17 +25,22 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        val pagerAdapter = HomePagerAdapter(childFragmentManager)
-        binding.homeViewPager.adapter = pagerAdapter
-        binding.homeViewPager.offscreenPageLimit = pagerAdapter.count
-        binding.homeTab.setupWithViewPager(binding.homeViewPager)
+        val pagerAdapter = HomePagerAdapter(requireActivity())
+        binding.homeViewPager.let {
+            it.adapter = pagerAdapter
+            it.offscreenPageLimit = pagerAdapter.itemCount
+        }
+        val mediator = TabLayoutMediator(binding.homeTab, binding.homeViewPager) { tab, position ->
+            tab.text = pagerAdapter.getItemTitle(position)
+        }
+        mediator.attach()
     }
 }
 
-class HomePagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+class HomePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     private val titles = arrayOf("New", "Popular")
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> NewPostsFragment()
             1 -> PopularPostsFragment()
@@ -42,11 +48,11 @@ class HomePagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
         }
     }
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return titles.size
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    fun getItemTitle(position: Int): String {
         return titles[position]
     }
 }
