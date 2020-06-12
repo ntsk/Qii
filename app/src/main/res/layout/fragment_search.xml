@@ -25,12 +25,20 @@
             android:id="@+id/fragment_search_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:title="@string/search"
             android:background="@color/white"
+            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </Toolbar>
 
         <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/fragment_search_posts_recycler_view"

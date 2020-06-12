@@ -19,6 +19,7 @@
             android:id="@+id/fragment_post_detail_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
@@ -21,6 +22,7 @@ import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import com.qii.ntsk.qii.utils.RandomStringGenerator
 import kotlinx.android.synthetic.main.layout_please_login.view.*
+import kotlin.math.abs
 
 class UserFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(UserViewModel::class.java) }
@@ -74,6 +76,9 @@ class UserFragment : Fragment() {
                 else -> false
             }
         }
+        binding.fragmentUserLoginView.fragmentUserLoginAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
+            binding.fragmentUserLoginView.fragmentUserLoginToolbarText.alpha = abs(i / appBarLayout.totalScrollRange.toFloat())
+        })
 
         viewModel.fetchAuthenticatedUser().observe(viewLifecycleOwner, Observer {
             binding.iconUrl = it.profileImageUrl
