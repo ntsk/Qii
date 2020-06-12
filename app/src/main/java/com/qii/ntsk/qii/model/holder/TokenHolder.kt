@@ -20,6 +20,6 @@ class TokenHolder {
     }
 
     fun delete() {
-        val editor = sharedPreference.edit().remove(TOKEN_PREF_KEY).apply()
+        sharedPreference.edit().remove(TOKEN_PREF_KEY).apply()
     }
 }
