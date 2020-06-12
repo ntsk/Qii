@@ -10,11 +10,9 @@
             android:id="@+id/layout_user_logout_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:elevation="4dp"
-            android:theme="@style/NoActionBarTheme"
             android:title="@string/user"
-            android:titleTextColor="@color/white"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

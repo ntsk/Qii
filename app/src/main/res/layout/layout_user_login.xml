@@ -18,15 +18,15 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="wrap_content"
             android:layout_height="300dp"
+            android:background="@color/white"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/fragment_user_login_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
                 android:fitsSystemWindows="true"
-                app:contentScrim="@color/colorAccent"
+                app:contentScrim="@color/white"
                 app:expandedTitleMarginEnd="56dp"
                 app:expandedTitleMarginStart="40dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -43,7 +43,6 @@
                         android:layout_height="100dp"
                         android:layout_marginTop="70dp"
                         android:scaleType="centerCrop"
-                        android:src="@color/white"
                         app:imageUrl="@{iconUrl}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +53,6 @@
                         android:id="@+id/layout_user_login_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:textSize="@dimen/text_headline"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/layout_user_login_user_id"
@@ -67,7 +65,6 @@
                         android:id="@+id/layout_user_login_user_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:textSize="@dimen/text_sub_header"
                         app:layout_constraintBottom_toTopOf="@id/layout_user_login_description"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +77,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_sub_medium"
-                        android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +90,6 @@
                     android:id="@+id/layout_user_login_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorAccent"
-                    android:theme="@style/NoActionBarTheme"
                     android:title="@string/user"
                     app:layout_collapseMode="pin" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>

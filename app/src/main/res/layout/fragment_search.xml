@@ -25,10 +25,9 @@
             android:id="@+id/fragment_search_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:elevation="4dp"
             android:title="@string/search"
-            android:titleTextColor="@color/white"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
