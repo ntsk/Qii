@@ -11,10 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class AuthenticatedUserItemsDataSource(
+        private val repository: UserRepository,
         private val scope: CoroutineScope,
         private val networkStateObserver: MutableLiveData<NetworkState>
 ) : PageKeyedDataSource<Int, Post>() {
-    private val repository = UserRepository()
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.LOADING))
@@ -57,11 +57,13 @@ class AuthenticatedUserItemsDataSource(
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope,
-                  private val networkStateObserver: MutableLiveData<NetworkState>
+    class Factory(
+            private val repository: UserRepository,
+            private val scope: CoroutineScope,
+            private val networkStateObserver: MutableLiveData<NetworkState>
     ) : DataSource.Factory<Int, Post>() {
         override fun create(): DataSource<Int, Post> {
-            return AuthenticatedUserItemsDataSource(scope, networkStateObserver)
+            return AuthenticatedUserItemsDataSource(repository, scope, networkStateObserver)
         }
     }
 

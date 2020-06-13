@@ -1,29 +1,29 @@
 package com.qii.ntsk.qii.ui.user
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.qii.ntsk.qii.datasource.holder.TokenHolder
 import com.qii.ntsk.qii.datasource.paging.AuthenticatedUserItemsDataSource
+import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
-import com.qii.ntsk.qii.datasource.holder.TokenHolder
-import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import kotlinx.coroutines.launch
 
-class UserViewModel(app: Application) : AndroidViewModel(app) {
+class UserViewModel @ViewModelInject constructor(
+        private val userRepository: UserRepository
+) : ViewModel() {
 
     val loginStateLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val userLiveData: MutableLiveData<User> = MutableLiveData()
 
     private var userPostsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
-
-    private val userRepository = UserRepository()
 
     val userPostsNetWorkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
 
@@ -47,7 +47,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     internal fun fetchAuthenticatedUserItems(): LiveData<PagedList<Post>> {
-        val factory = AuthenticatedUserItemsDataSource.Factory(viewModelScope, userPostsNetWorkStateObserver)
+        val factory = AuthenticatedUserItemsDataSource.Factory(userRepository, viewModelScope, userPostsNetWorkStateObserver)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)
