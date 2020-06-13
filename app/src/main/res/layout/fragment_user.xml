@@ -22,7 +22,7 @@
         <include
             android:id="@+id/fragment_user_login_view"
             layout="@layout/layout_user_login"
-            android:visibility="@{viewModel.loginStateLiveData.booleanValue() ? View.VISIBLE : View.GONE}"
+            android:visibility="gone"
             app:iconUrl="@{iconUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,18 @@
         <include
             android:id="@+id/fragment_user_logout_view"
             layout="@layout/layout_user_logout"
-            android:visibility="@{viewModel.loginStateLiveData.booleanValue() ? View.GONE : View.VISIBLE}"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/fragment_user_loading"
+            layout="@layout/view_loading_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

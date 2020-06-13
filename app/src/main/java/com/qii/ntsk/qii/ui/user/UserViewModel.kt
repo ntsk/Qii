@@ -12,6 +12,7 @@ import com.qii.ntsk.qii.datasource.paging.AuthenticatedUserItemsDataSource
 import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
+import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.NetworkState
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,7 @@ class UserViewModel @ViewModelInject constructor(
         private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val loginStateLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loginStateLiveData: MutableLiveData<LoginState> = MutableLiveData()
 
     private val userLiveData: MutableLiveData<User> = MutableLiveData()
 
@@ -29,9 +30,9 @@ class UserViewModel @ViewModelInject constructor(
 
     init {
         if (TokenHolder().load() != null) {
-            loginStateLiveData.postValue(true)
+            loginStateLiveData.postValue(LoginState.LOGIN)
         } else {
-            loginStateLiveData.postValue(false)
+            loginStateLiveData.postValue(LoginState.LOGOUT)
         }
     }
 
@@ -59,6 +60,6 @@ class UserViewModel @ViewModelInject constructor(
 
     internal fun deleteToken() {
         TokenHolder().delete()
-        loginStateLiveData.postValue(false)
+        loginStateLiveData.postValue(LoginState.LOGOUT)
     }
 }

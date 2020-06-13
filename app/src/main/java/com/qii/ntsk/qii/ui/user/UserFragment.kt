@@ -15,6 +15,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
+import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
@@ -34,21 +35,28 @@ class UserFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_user, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_user, container, false)
         binding = FragmentUserBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.loginStateLiveData.observe(viewLifecycleOwner, Observer { isLogin ->
-            if (isLogin) showLoginView() else showLogoutView()
+        binding.fragmentUserLogoutView.root.visibility = View.GONE
+        binding.fragmentUserLoginView.root.visibility = View.GONE
+        viewModel.loginStateLiveData.observe(viewLifecycleOwner, Observer { loginState ->
+            when (loginState) {
+                LoginState.LOGOUT -> showLogoutView()
+                LoginState.LOGIN -> showLoginView()
+                else -> showLoginView()
+            }
         })
+        return binding.root
     }
 
     private fun showLogoutView() {
+        binding.fragmentUserLoginView.root.visibility = View.GONE
+        binding.fragmentUserLogoutView.root.visibility = View.VISIBLE
+        binding.fragmentUserLoading.root.visibility = View.GONE
+
         binding.fragmentUserLogoutView.layoutUserLogoutEmpty.layout_please_login_button.setOnClickListener {
             login()
         }
@@ -67,6 +75,10 @@ class UserFragment : Fragment() {
     }
 
     private fun showLoginView() {
+        binding.fragmentUserLoginView.root.visibility = View.VISIBLE
+        binding.fragmentUserLogoutView.root.visibility = View.GONE
+        binding.fragmentUserLoading.root.visibility = View.GONE
+
         controller = UserItemsController { post ->
             val activity = requireActivity() as MainActivity
             activity.showPostDetail(post)
