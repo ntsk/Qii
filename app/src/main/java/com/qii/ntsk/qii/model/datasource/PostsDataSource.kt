@@ -38,10 +38,15 @@ class PostsDataSource(
             val body = response.body()
             var currentPage = params.key.toInt()
 
-            if (response.isSuccessful && body != null) {
-                networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
-                currentPage++
-                callback.onResult(body.toMutableList(), currentPage.toString())
+            if (response.isSuccessful) {
+                if (body != null) {
+                    networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
+                    currentPage++
+                    callback.onResult(body.toMutableList(), currentPage.toString())
+                } else {
+                    networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
+                    callback.onResult(mutableListOf(), currentPage.toString())
+                }
             } else {
                 callback.onResult(mutableListOf(), params.key)
             }

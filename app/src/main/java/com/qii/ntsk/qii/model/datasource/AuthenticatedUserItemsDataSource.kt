@@ -37,11 +37,17 @@ class AuthenticatedUserItemsDataSource(
             val body = response.body()
             var currentPage = params.key
 
-            if (response.isSuccessful && body != null) {
-                networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
-                currentPage++
-                callback.onResult(body.toMutableList(), currentPage)
+            if (response.isSuccessful) {
+                if (body != null) {
+                    networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
+                    currentPage++
+                    callback.onResult(body.toMutableList(), currentPage)
+                } else {
+                    networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
+                    callback.onResult(mutableListOf(), currentPage)
+                }
             } else {
+                networkStateObserver.postValue(NetworkState(status = Status.SUCCESS, responseCode = response.code()))
                 callback.onResult(mutableListOf(), params.key)
             }
         }

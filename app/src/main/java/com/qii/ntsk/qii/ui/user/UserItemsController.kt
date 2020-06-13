@@ -13,9 +13,7 @@ class UserItemsController : PagedListEpoxyController<Post>() {
     var isLoading = false
         set(value) {
             field = value
-            if (field) {
-                requestModelBuild()
-            }
+            requestModelBuild()
         }
 
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
