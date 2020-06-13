@@ -11,11 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class PostsDataSource(
+        private val repository: PostsRepository,
         private val scope: CoroutineScope,
         private val networkStateObserver: MutableLiveData<NetworkState>,
         private val query: String?
 ) : PageKeyedDataSource<String, Post>() {
-    private val repository = PostsRepository()
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.LOADING))
@@ -57,12 +57,14 @@ class PostsDataSource(
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope,
-                  private val networkStateObserver: MutableLiveData<NetworkState>,
-                  private val query: String?
+    class Factory(
+            private val repository: PostsRepository,
+            private val scope: CoroutineScope,
+            private val networkStateObserver: MutableLiveData<NetworkState>,
+            private val query: String?
     ) : DataSource.Factory<String, Post>() {
         override fun create(): DataSource<String, Post> {
-            return PostsDataSource(scope, networkStateObserver, query)
+            return PostsDataSource(repository, scope, networkStateObserver, query)
         }
     }
 

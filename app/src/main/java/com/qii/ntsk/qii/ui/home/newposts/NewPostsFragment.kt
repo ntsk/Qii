@@ -6,18 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentNewPostsBinding
+import com.qii.ntsk.qii.model.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class NewPostsFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(NewPostsViewModel::class.java) }
+    private val viewModel: NewPostsViewModel by viewModels()
     private val controller = NewPostsController()
     private lateinit var binding: FragmentNewPostsBinding
+
+    @Inject
+    lateinit var repository: PostsRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

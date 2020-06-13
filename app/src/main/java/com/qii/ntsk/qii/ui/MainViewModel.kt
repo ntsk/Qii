@@ -1,15 +1,16 @@
 package com.qii.ntsk.qii.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.qii.ntsk.qii.model.entity.Token
 import com.qii.ntsk.qii.model.repository.TokenRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(app: Application) : AndroidViewModel(app) {
-    private val tokenRepository = TokenRepository()
+class MainViewModel @ViewModelInject constructor(
+        private val tokenRepository: TokenRepository
+) : ViewModel() {
 
     private val tokenObserver: MutableLiveData<Token> = MutableLiveData()
 

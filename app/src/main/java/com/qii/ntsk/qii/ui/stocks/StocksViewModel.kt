@@ -1,13 +1,12 @@
 package com.qii.ntsk.qii.ui.stocks
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.qii.ntsk.qii.model.datasource.PostsDataSource
 import com.qii.ntsk.qii.model.datasource.StocksDataSource
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
@@ -16,7 +15,9 @@ import com.qii.ntsk.qii.model.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import kotlinx.coroutines.launch
 
-class StocksViewModel(app: Application) : AndroidViewModel(app) {
+class StocksViewModel @ViewModelInject constructor(
+        private val userRepository: UserRepository
+) : ViewModel() {
     val loginStateLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     var netWorkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
@@ -24,8 +25,6 @@ class StocksViewModel(app: Application) : AndroidViewModel(app) {
     private val userLiveData: MutableLiveData<User> = MutableLiveData()
 
     private var stocksPostsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
-
-    private val userRepository = UserRepository()
 
     init {
         if (TokenHolder().load() != null) {
@@ -37,7 +36,7 @@ class StocksViewModel(app: Application) : AndroidViewModel(app) {
 
     internal fun fetchStocks(userId: String?): LiveData<PagedList<Post>> {
         if (userId == null) return stocksPostsLiveData
-        val factory = StocksDataSource.Factory(viewModelScope, netWorkStateObserver, userId)
+        val factory = StocksDataSource.Factory(userRepository, viewModelScope, netWorkStateObserver, userId)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)

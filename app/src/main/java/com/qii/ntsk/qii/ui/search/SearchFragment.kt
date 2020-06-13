@@ -5,22 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.holder.SearchQueryHolder
+import com.qii.ntsk.qii.model.repository.PostsRepository
+import com.qii.ntsk.qii.model.repository.TagsRepository
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.utils.QueryBuilder
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(SearchViewModel::class.java) }
+    private val viewModel: SearchViewModel by viewModels()
     private val controller = SearchController()
     private lateinit var binding: FragmentSearchBinding
+
+    @Inject
+    lateinit var postsRepository: PostsRepository
+
+    @Inject
+    lateinit var tagsRepository: TagsRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
