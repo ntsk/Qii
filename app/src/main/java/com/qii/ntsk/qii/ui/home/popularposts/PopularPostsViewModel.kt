@@ -24,7 +24,6 @@ class PopularPostsViewModel(app: Application) : AndroidViewModel(app) {
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(20)
-                .setPrefetchDistance(40)
                 .setMaxSize(100)
                 .build()
         popularPostsObserver = LivePagedListBuilder(factory, config).build()

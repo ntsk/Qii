@@ -28,13 +28,9 @@ class PopularPostsFragment : Fragment() {
         val recyclerView = binding.fragmentPopularPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
+            controller.requestModelBuild()
         })
 
         viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {
@@ -45,5 +41,6 @@ class PopularPostsFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
+        return view
     }
 }

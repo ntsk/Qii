@@ -36,11 +36,6 @@ class SearchFragment : Fragment() {
         if (recyclerView.adapter?.itemCount == 0) {
             binding.defaultEmpty = true
         }
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         val tagsState = TagsState.get()
         if (tagsState == null) {
@@ -51,6 +46,7 @@ class SearchFragment : Fragment() {
         } else {
             initBottomSheet(tagsState)
         }
+        return view
     }
 
     private fun initBottomSheet(tags: Tags) {

@@ -28,11 +28,7 @@ class NewPostsFragment : Fragment() {
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
-        return view
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel.newPostsLiveData.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()
@@ -46,5 +42,6 @@ class NewPostsFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
+        return view
     }
 }

@@ -24,9 +24,10 @@ class PostDetailFragment : Fragment() {
         val post = arguments?.get(BUNDLE_KEY_POST_DETAIL) as? Post ?: return view
         binding.fragmentPostDetailToolbar.title = post.title
         binding.fragmentPostDetailToolbar.setNavigationIcon(R.drawable.ic_arrow)
+        val activity = activity as MainActivity
+        activity.hideBottomNavigation()
         binding.fragmentPostDetailToolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStack()
-            val activity = activity as MainActivity
             activity.showBottomNavigation()
         }
 
@@ -45,12 +46,6 @@ class PostDetailFragment : Fragment() {
         binding.fragmentPostDetailWebView.webViewClient = client
         binding.fragmentPostDetailWebView.loadUrl(post.url)
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val activity = activity as MainActivity
-        activity.hideBottomNavigation()
     }
 
     class Builder(post: Post) {
