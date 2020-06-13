@@ -3,7 +3,7 @@ package com.qii.ntsk.qii.ui
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.qii.ntsk.qii.QiiApp
-import com.qii.ntsk.qii.model.service.GlideApp
+import com.qii.ntsk.qii.datasource.service.GlideApp
 
 object ViewBindingAdapter {
 

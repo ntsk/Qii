@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
 import com.qii.ntsk.qii.model.entity.Tags
-import com.qii.ntsk.qii.model.holder.SearchQueryHolder
-import com.qii.ntsk.qii.model.repository.PostsRepository
-import com.qii.ntsk.qii.model.repository.TagsRepository
+import com.qii.ntsk.qii.datasource.holder.SearchQueryHolder
+import com.qii.ntsk.qii.datasource.repository.PostsRepository
+import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.model.state.TagsState
 import com.qii.ntsk.qii.utils.QueryBuilder

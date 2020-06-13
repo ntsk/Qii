@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
-import com.qii.ntsk.qii.model.repository.PostsRepository
+import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

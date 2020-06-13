@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
-import com.qii.ntsk.qii.model.repository.UserRepository
+import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*

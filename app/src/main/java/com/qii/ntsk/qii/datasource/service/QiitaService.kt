@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model.service
+package com.qii.ntsk.qii.datasource.service
 
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.Tag

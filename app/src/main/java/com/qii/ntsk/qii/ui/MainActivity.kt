@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
 import com.qii.ntsk.qii.ui.stocks.StocksFragment
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.model.holder.TokenHolder
-import com.qii.ntsk.qii.model.repository.TokenRepository
+import com.qii.ntsk.qii.datasource.holder.TokenHolder
+import com.qii.ntsk.qii.datasource.repository.TokenRepository
 import com.qii.ntsk.qii.ui.detail.PostDetailFragment
 import com.qii.ntsk.qii.ui.home.HomeFragment
 import com.qii.ntsk.qii.ui.search.SearchFragment

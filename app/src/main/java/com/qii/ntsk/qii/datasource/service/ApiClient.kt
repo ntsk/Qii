@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model.service
+package com.qii.ntsk.qii.datasource.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

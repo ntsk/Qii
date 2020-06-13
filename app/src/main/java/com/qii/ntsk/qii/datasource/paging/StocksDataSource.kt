@@ -1,10 +1,10 @@
-package com.qii.ntsk.qii.model.datasource
+package com.qii.ntsk.qii.datasource.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.model.repository.UserRepository
+import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import com.qii.ntsk.qii.model.state.Status
 import kotlinx.coroutines.CoroutineScope

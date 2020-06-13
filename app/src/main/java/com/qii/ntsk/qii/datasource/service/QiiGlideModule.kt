@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.model.service
+package com.qii.ntsk.qii.datasource.service
 
 import android.content.Context
 import com.bumptech.glide.Glide
