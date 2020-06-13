@@ -18,7 +18,7 @@ object Connection {
 
     class AuthInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
-            val url = chain.request().url()
+            val url = chain.request().url
             val token = TokenHolder().load()
             val requestBuilder = chain.request().newBuilder().url(url)
 
