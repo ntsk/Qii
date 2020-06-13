@@ -13,13 +13,14 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PopularPostsFragment : Fragment() {
     private val viewModel: PopularPostsViewModel by viewModels()
-    private val controller = PopularPostsController()
+    private lateinit var controller: PopularPostsController
     private lateinit var binding: FragmentPopularPostsBinding
 
     @Inject
@@ -32,6 +33,10 @@ class PopularPostsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        controller = PopularPostsController { post ->
+            val activity = requireActivity() as MainActivity
+            activity.showPostDetail(post)
+        }
         val recyclerView = binding.fragmentPopularPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))

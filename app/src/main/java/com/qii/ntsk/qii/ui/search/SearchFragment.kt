@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
-import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.datasource.holder.SearchQueryHolder
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
+import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.model.state.TagsState
+import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.QueryBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
-    private val controller = SearchController()
+    private lateinit var controller: SearchController
     private lateinit var binding: FragmentSearchBinding
 
     @Inject
@@ -40,6 +41,10 @@ class SearchFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        controller = SearchController { post ->
+            val activity = requireActivity() as MainActivity
+            activity.showPostDetail(post)
+        }
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))

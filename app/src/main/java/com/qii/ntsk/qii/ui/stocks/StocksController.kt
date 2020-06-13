@@ -6,10 +6,9 @@ import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.ModelViewListLoadingBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.DateFormatUtil
 
-class StocksController : PagedListEpoxyController<Post>() {
+class StocksController(private val onItemClick: (Post) -> Unit) : PagedListEpoxyController<Post>() {
     var isLoading = false
         set(value) {
             field = value
@@ -26,8 +25,7 @@ class StocksController : PagedListEpoxyController<Post>() {
                 .userImageUrl(item?.user?.profileImageUrl)
                 .clickListener(View.OnClickListener {
                     if (item?.url != null) {
-                        val activity = it.context as MainActivity
-                        activity.showPostDetail(item)
+                        onItemClick(item)
                     }
                 })
                 .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))

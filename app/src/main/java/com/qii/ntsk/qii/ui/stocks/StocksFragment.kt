@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
+import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
@@ -20,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StocksFragment : Fragment() {
     private val viewModel: StocksViewModel by viewModels()
-    private val controller = StocksController()
+    private lateinit var controller: StocksController
     private lateinit var binding: FragmentStocksBinding
 
     @Inject
@@ -31,6 +32,10 @@ class StocksFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_stocks, container, false)
         binding = FragmentStocksBinding.bind(view)
 
+        controller = StocksController { post ->
+            val activity = requireActivity() as MainActivity
+            activity.showPostDetail(post)
+        }
         val recyclerView = binding.fragmentFavoriteRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))

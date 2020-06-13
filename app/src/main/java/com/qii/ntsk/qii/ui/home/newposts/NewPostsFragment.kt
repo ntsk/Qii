@@ -14,13 +14,14 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentNewPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewPostsFragment : Fragment() {
     private val viewModel: NewPostsViewModel by viewModels()
-    private val controller = NewPostsController()
+    private lateinit var controller: NewPostsController
     private lateinit var binding: FragmentNewPostsBinding
 
     @Inject
@@ -31,6 +32,10 @@ class NewPostsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_new_posts, container, false)
         binding = FragmentNewPostsBinding.bind(view)
 
+        controller = NewPostsController { post ->
+            val activity = requireActivity() as MainActivity
+            activity.showPostDetail(post)
+        }
         val recyclerView = binding.fragmentNewPostsRecyclerView
         recyclerView.setController(controller)
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))

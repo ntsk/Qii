@@ -1,9 +1,6 @@
 package com.qii.ntsk.qii.ui.user
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,20 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
-import com.qii.ntsk.qii.BuildConfig
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
-import com.qii.ntsk.qii.utils.RandomStringGenerator
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import kotlin.math.abs
 
 class UserFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(UserViewModel::class.java) }
     private lateinit var binding: FragmentUserBinding
-    private val controller = UserItemsController()
+    private lateinit var controller: UserItemsController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -65,6 +60,10 @@ class UserFragment : Fragment() {
     }
 
     private fun showLoginView() {
+        controller = UserItemsController { post ->
+            val activity = requireActivity() as MainActivity
+            activity.showPostDetail(post)
+        }
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
