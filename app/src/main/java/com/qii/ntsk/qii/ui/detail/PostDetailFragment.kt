@@ -27,7 +27,7 @@ class PostDetailFragment : Fragment() {
         val activity = activity as MainActivity
         activity.hideBottomNavigation()
         binding.fragmentPostDetailToolbar.setNavigationOnClickListener {
-            fragmentManager?.popBackStack()
+            activity.supportFragmentManager.popBackStack()
             activity.showBottomNavigation()
         }
 
