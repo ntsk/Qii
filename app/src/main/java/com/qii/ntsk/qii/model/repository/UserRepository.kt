@@ -5,8 +5,11 @@ import com.qii.ntsk.qii.model.entity.User
 import com.qii.ntsk.qii.model.service.ApiClient
 import com.qii.ntsk.qii.model.service.QiitaService
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserRepository {
+@Singleton
+class UserRepository @Inject constructor() {
     suspend fun getAuthenticatedUser(): Response<User> {
         return ApiClient.create(QiitaService::class.java).getAuthenticatedUser()
     }

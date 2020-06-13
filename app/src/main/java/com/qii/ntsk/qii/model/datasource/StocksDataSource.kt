@@ -11,11 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class StocksDataSource(
+        private val repository: UserRepository,
         private val scope: CoroutineScope,
         private val networkStateObserver: MutableLiveData<NetworkState>,
         private val userId: String
 ) : PageKeyedDataSource<Int, Post>() {
-    private val repository = UserRepository()
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.LOADING))
@@ -52,12 +52,14 @@ class StocksDataSource(
         // Do Nothing
     }
 
-    class Factory(private val scope: CoroutineScope,
-                  private val networkStateObserver: MutableLiveData<NetworkState>,
-                  private val userId: String
+    class Factory(
+            private val repository: UserRepository,
+            private val scope: CoroutineScope,
+            private val networkStateObserver: MutableLiveData<NetworkState>,
+            private val userId: String
     ) : DataSource.Factory<Int, Post>() {
         override fun create(): DataSource<Int, Post> {
-            return StocksDataSource(scope, networkStateObserver, userId)
+            return StocksDataSource(repository, scope, networkStateObserver, userId)
         }
     }
 

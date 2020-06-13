@@ -5,8 +5,11 @@ import com.qii.ntsk.qii.model.entity.Token
 import com.qii.ntsk.qii.model.service.ApiClient
 import com.qii.ntsk.qii.model.service.QiitaService
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TokenRepository {
+@Singleton
+class TokenRepository @Inject constructor() {
     suspend fun getToken(code: String): Response<Token> {
         return ApiClient.create(QiitaService::class.java).getToken(
                 code = code,

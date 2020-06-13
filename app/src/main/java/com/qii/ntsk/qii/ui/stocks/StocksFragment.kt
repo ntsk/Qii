@@ -5,19 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
+import com.qii.ntsk.qii.model.repository.UserRepository
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class StocksFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(StocksViewModel::class.java) }
+    private val viewModel: StocksViewModel by viewModels()
     private val controller = StocksController()
     private lateinit var binding: FragmentStocksBinding
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
