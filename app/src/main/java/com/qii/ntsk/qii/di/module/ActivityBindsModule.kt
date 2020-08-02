@@ -8,7 +8,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class ApplicationBindsModule {
+abstract class ActivityBindsModule {
     @Binds
     abstract fun bindPostsRepository(postsRepositoryImpl: PostsRepositoryImpl): PostsRepository
 
