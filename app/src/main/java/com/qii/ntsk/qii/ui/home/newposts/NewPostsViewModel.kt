@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.qii.ntsk.qii.datasource.paging.PostsDataSource
-import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
+import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.state.NetworkState
 
 class NewPostsViewModel @ViewModelInject constructor(
