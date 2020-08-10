@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.datasource.repository.UserRepository
+import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.state.NetworkState
 import com.qii.ntsk.qii.model.state.Status
 import kotlinx.coroutines.CoroutineScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AuthenticatedUserItemsDataSource(
-        private val repository: UserRepository,
+        private val repository: UserRepositoryImpl,
         private val scope: CoroutineScope,
         private val networkStateObserver: MutableLiveData<NetworkState>
 ) : PageKeyedDataSource<Int, Post>() {
@@ -59,7 +59,7 @@ class AuthenticatedUserItemsDataSource(
     }
 
     class Factory(
-            private val repository: UserRepository,
+            private val repository: UserRepositoryImpl,
             private val scope: CoroutineScope,
             private val networkStateObserver: MutableLiveData<NetworkState>
     ) : DataSource.Factory<Int, Post>() {

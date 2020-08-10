@@ -4,8 +4,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.qii.ntsk.qii.model.entity.Token
 import com.qii.ntsk.qii.datasource.repository.TokenRepository
+import com.qii.ntsk.qii.model.entity.Token
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(

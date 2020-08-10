@@ -9,7 +9,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.qii.ntsk.qii.datasource.holder.TokenHolder
 import com.qii.ntsk.qii.datasource.paging.AuthenticatedUserItemsDataSource
-import com.qii.ntsk.qii.datasource.repository.UserRepository
+import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
 import com.qii.ntsk.qii.model.state.LoginState
@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel @ViewModelInject constructor(
-        private val userRepository: UserRepository
+        private val userRepository: UserRepositoryImpl
 ) : ViewModel() {
 
     val loginStateLiveData: MutableLiveData<LoginState> = MutableLiveData()

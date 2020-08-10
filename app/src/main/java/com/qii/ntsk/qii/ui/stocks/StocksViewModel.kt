@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.qii.ntsk.qii.datasource.holder.TokenHolder
 import com.qii.ntsk.qii.datasource.paging.StocksDataSource
+import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
-import com.qii.ntsk.qii.datasource.holder.TokenHolder
-import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
-import com.qii.ntsk.qii.datasource.repository.UserRepository
+import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.ui.MainActivity
@@ -31,7 +31,7 @@ class UserFragment : Fragment() {
     private lateinit var controller: UserItemsController
 
     @Inject
-    lateinit var userRepository: UserRepository
+    lateinit var userRepository: UserRepositoryImpl
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
