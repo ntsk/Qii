@@ -8,6 +8,7 @@ import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import com.qii.ntsk.qii.model.state.Status
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class StocksDataSource(
@@ -19,7 +20,7 @@ class StocksDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.LOADING))
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             val response = repository.getStocks(userId, DEFAULT_PAGE, params.requestedLoadSize)
             val body = response.body()
             if (response.isSuccessful && body != null && body.isNotEmpty()) {
@@ -33,7 +34,7 @@ class StocksDataSource(
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.PAGING))
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             val response = repository.getStocks(userId, params.key, params.requestedLoadSize)
             val body = response.body()
             var currentPage = params.key

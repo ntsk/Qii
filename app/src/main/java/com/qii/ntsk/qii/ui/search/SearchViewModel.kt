@@ -13,6 +13,7 @@ import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.state.NetworkState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SearchViewModel @ViewModelInject constructor(
@@ -26,7 +27,7 @@ class SearchViewModel @ViewModelInject constructor(
     var networkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
 
     internal fun fetchTags(): MutableLiveData<Tags> {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val tagsResponse = tagsRepository.fetch("1", "50", "count")
             val tagsBody = tagsResponse.body()
             if (tagsResponse.isSuccessful && tagsBody != null) {

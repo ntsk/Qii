@@ -8,6 +8,7 @@ import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.NetworkState
 import com.qii.ntsk.qii.model.state.Status
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostsDataSource(
@@ -19,7 +20,7 @@ class PostsDataSource(
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.LOADING))
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             val response = repository.fetch(DEFAULT_PAGE, params.requestedLoadSize.toString(), query)
             val body = response.body()
             if (response.isSuccessful && body != null && body.isNotEmpty()) {
@@ -33,7 +34,7 @@ class PostsDataSource(
 
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Post>) {
         networkStateObserver.postValue(NetworkState(status = Status.PAGING))
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             val response = repository.fetch(params.key, params.requestedLoadSize.toString(), query)
             val body = response.body()
             var currentPage = params.key.toInt()

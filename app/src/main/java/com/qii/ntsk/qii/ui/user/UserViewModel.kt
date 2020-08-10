@@ -14,6 +14,7 @@ import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.model.entity.User
 import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.NetworkState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel @ViewModelInject constructor(
@@ -37,7 +38,7 @@ class UserViewModel @ViewModelInject constructor(
     }
 
     internal fun fetchAuthenticatedUser(): MutableLiveData<User> {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val response = userRepository.getAuthenticatedUser()
             val body = response.body()
             if (response.isSuccessful && body != null) {
