@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        val pagerAdapter = HomePagerAdapter(requireActivity())
+        val pagerAdapter = HomePagerAdapter(this)
         binding.homeViewPager.let {
             it.adapter = pagerAdapter
             it.offscreenPageLimit = pagerAdapter.itemCount
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
     }
 }
 
-class HomePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+class HomePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     private val titles = arrayOf("New", "Popular")
 
     override fun createFragment(position: Int): Fragment {
