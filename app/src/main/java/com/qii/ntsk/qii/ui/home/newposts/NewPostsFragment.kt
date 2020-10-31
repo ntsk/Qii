@@ -1,6 +1,7 @@
 package com.qii.ntsk.qii.ui.home.newposts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,8 @@ class NewPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_new_posts, container, false)
         binding = FragmentNewPostsBinding.bind(view)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         controller = NewPostsController { post ->
             val activity = requireActivity() as MainActivity

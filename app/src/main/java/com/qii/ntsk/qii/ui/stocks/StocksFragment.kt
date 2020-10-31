@@ -31,6 +31,8 @@ class StocksFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_stocks, container, false)
         binding = FragmentStocksBinding.bind(view)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner  = viewLifecycleOwner
 
         controller = StocksController { post ->
             val activity = requireActivity() as MainActivity

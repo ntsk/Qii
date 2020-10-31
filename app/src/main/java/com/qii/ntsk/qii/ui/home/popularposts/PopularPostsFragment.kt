@@ -30,8 +30,8 @@ class PopularPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_popular_posts, container, false)
         binding = FragmentPopularPostsBinding.bind(view)
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         controller = PopularPostsController { post ->
             val activity = requireActivity() as MainActivity
