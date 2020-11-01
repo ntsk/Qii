@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
