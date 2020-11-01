@@ -12,6 +12,7 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentHomeBinding
 import com.qii.ntsk.qii.ui.home.newposts.NewPostsFragment
 import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsFragment
+import com.qii.ntsk.qii.ui.stocks.StocksFragment
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -38,21 +39,28 @@ class HomeFragment : Fragment() {
 }
 
 class HomePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    private val titles = arrayOf("New", "Popular")
+    enum class HomeTab(val title: String) {
+        NEW("NEW"),
+        POPULAR("POPULAR"),
+        STOCK("STOCK");
+
+        val fragment: Fragment
+            get() = when (this) {
+                NEW -> NewPostsFragment()
+                POPULAR -> PopularPostsFragment()
+                STOCK -> StocksFragment()
+            }
+    }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> NewPostsFragment()
-            1 -> PopularPostsFragment()
-            else -> NewPostsFragment()
-        }
+        return HomeTab.values()[position].fragment
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return HomeTab.values().size
     }
 
     fun getItemTitle(position: Int): String {
-        return titles[position]
+        return HomeTab.values()[position].title
     }
 }
