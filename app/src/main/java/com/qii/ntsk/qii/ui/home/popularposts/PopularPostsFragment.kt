@@ -36,7 +36,11 @@ class PopularPostsFragment : Fragment() {
             activity.showPostDetail(post)
         }
         binding.fragmentPopularPostsRecyclerView.setController(controller)
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()
@@ -50,6 +54,5 @@ class PopularPostsFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
-        return view
     }
 }

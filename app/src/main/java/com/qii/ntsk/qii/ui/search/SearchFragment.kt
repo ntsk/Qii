@@ -49,7 +49,11 @@ class SearchFragment : Fragment() {
         if (recyclerView.adapter?.itemCount == 0) {
             binding.defaultEmpty = true
         }
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val tagsState = TagsState.get()
         if (tagsState == null) {
             viewModel.fetchTags().observe(viewLifecycleOwner, Observer { tags ->
@@ -59,7 +63,6 @@ class SearchFragment : Fragment() {
         } else {
             initBottomSheet(tagsState)
         }
-        return view
     }
 
     private fun initBottomSheet(tags: Tags) {

@@ -40,6 +40,11 @@ class UserFragment : Fragment() {
 
         binding.fragmentUserLogoutView.root.visibility = View.GONE
         binding.fragmentUserLoginView.root.visibility = View.GONE
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.loginStateLiveData.observe(viewLifecycleOwner, Observer { loginState ->
             when (loginState) {
                 LoginState.LOGOUT -> showLogoutView()
@@ -47,7 +52,6 @@ class UserFragment : Fragment() {
                 else -> showLoginView()
             }
         })
-        return binding.root
     }
 
     private fun showLogoutView() {

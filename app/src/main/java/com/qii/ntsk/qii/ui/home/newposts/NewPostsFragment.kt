@@ -37,6 +37,11 @@ class NewPostsFragment : Fragment() {
         }
         binding.fragmentNewPostsRecyclerView.setController(controller)
 
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.newPostsLiveData.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()
@@ -50,6 +55,5 @@ class NewPostsFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
-        return view
     }
 }
