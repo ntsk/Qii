@@ -11,7 +11,7 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,8 +32,7 @@ class PopularPostsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         controller = PopularPostsController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
         binding.fragmentPopularPostsRecyclerView.setController(controller)
         return view

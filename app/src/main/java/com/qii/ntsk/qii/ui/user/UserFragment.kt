@@ -15,7 +15,7 @@ import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.Status
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
@@ -82,8 +82,7 @@ class UserFragment : Fragment() {
         binding.fragmentUserLoading.root.visibility = View.GONE
 
         controller = UserItemsController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
         binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
@@ -131,8 +130,7 @@ class UserFragment : Fragment() {
                 .setPositiveButton("Yes") { _, _ ->
                     viewModel.deleteToken()
                     Toast.makeText(context, R.string.message_success_logout, Toast.LENGTH_LONG).show()
-                    val activity = activity as MainActivity
-                    activity.reloadViews()
+                    activity?.recreate()
                 }
                 .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
                 .show()

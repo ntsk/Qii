@@ -15,7 +15,7 @@ import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.model.state.TagsState
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.QueryBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -40,8 +40,7 @@ class SearchFragment : Fragment() {
         binding.viewModel = viewModel
 
         controller = SearchController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
@@ -73,7 +72,7 @@ class SearchFragment : Fragment() {
                     showPosts()
                 }
             })
-            bottomSheet.show(requireFragmentManager(), bottomSheet.tag)
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
     }
 

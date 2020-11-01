@@ -27,5 +27,5 @@ data class Post(
 
         val tags: List<Tag>?,
         val user: User?,
-        val url: String?
-): Serializable
+        val url: String
+) : Serializable

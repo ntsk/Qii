@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
@@ -33,8 +33,7 @@ class StocksFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         controller = StocksController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
         binding.fragmentFavoriteRecyclerView.setController(controller)
         return view
