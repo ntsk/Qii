@@ -47,7 +47,6 @@ class SearchFragment : Fragment() {
         }
         val recyclerView = binding.fragmentSearchPostsRecyclerView
         recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
 
         if (recyclerView.adapter?.itemCount == 0) {
             binding.defaultEmpty = true

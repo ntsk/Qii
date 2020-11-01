@@ -39,10 +39,7 @@ class NewPostsFragment : Fragment() {
             val activity = requireActivity() as MainActivity
             activity.showPostDetail(post)
         }
-        val recyclerView = binding.fragmentNewPostsRecyclerView
-        recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
+        binding.fragmentNewPostsRecyclerView.setController(controller)
 
         viewModel.newPostsLiveData.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)

@@ -109,7 +109,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.airbnb.epoxy.EpoxyRecyclerView
+        <com.qii.ntsk.qii.widget.PostsRecyclerView
             android:id="@+id/layout_user_login_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

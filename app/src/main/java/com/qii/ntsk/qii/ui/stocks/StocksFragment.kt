@@ -32,15 +32,13 @@ class StocksFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_stocks, container, false)
         binding = FragmentStocksBinding.bind(view)
         binding.viewModel = viewModel
-        binding.lifecycleOwner  = viewLifecycleOwner
+        binding.lifecycleOwner = viewLifecycleOwner
 
         controller = StocksController { post ->
             val activity = requireActivity() as MainActivity
             activity.showPostDetail(post)
         }
-        val recyclerView = binding.fragmentFavoriteRecyclerView
-        recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentFavoriteRecyclerView.setController(controller)
         return view
     }
 

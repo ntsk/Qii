@@ -37,9 +37,8 @@ class PopularPostsFragment : Fragment() {
             val activity = requireActivity() as MainActivity
             activity.showPostDetail(post)
         }
-        val recyclerView = binding.fragmentPopularPostsRecyclerView
-        recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentPopularPostsRecyclerView.setController(controller)
+
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()

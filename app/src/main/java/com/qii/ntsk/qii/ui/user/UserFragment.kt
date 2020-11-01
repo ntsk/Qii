@@ -84,7 +84,6 @@ class UserFragment : Fragment() {
             activity.showPostDetail(post)
         }
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
-        binding.fragmentUserLoginView.layoutUserLoginRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
         binding.fragmentUserLoginView.layoutUserLoginToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
