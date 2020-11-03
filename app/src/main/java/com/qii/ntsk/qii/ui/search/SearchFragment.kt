@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -53,6 +54,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initSearchView()
+
         val tagsState = TagsState.get()
         if (tagsState == null) {
             viewModel.fetchTags().observe(viewLifecycleOwner, Observer { tags ->
@@ -62,6 +65,24 @@ class SearchFragment : Fragment() {
         } else {
             initBottomSheet(tagsState)
         }
+    }
+
+    private fun initSearchView() {
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.fragmentSearchSearchView.clearFocus()
+                viewModel.search(query ?: "").observe(viewLifecycleOwner, Observer {
+                    binding.defaultEmpty = false
+                    controller.submitList(it)
+                })
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        }
+        binding.fragmentSearchSearchView.setOnQueryTextListener(queryTextListener)
     }
 
     private fun initBottomSheet(tags: Tags) {
