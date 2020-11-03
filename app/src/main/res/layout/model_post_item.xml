@@ -60,6 +60,18 @@
             tools:text="Create intuitive and beautiful products with Material Design." />
 
         <TextView
+            android:id="@+id/post_lgtm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sub_wide"
+            android:text="@{post.likesCount + ` LGTM` }"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_image"
+            tools:text="0 LGTM" />
+
+        <TextView
             android:id="@+id/post_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
