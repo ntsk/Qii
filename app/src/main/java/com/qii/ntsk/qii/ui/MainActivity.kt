@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             val tokenHolder = TokenHolder()
             tokenHolder.save(it.token)
             Toast.makeText(this, R.string.message_success_login, Toast.LENGTH_LONG).show()
-            recreate()
+            reload()
         })
 
         viewModel.errorObserver.observe(this, Observer {
@@ -102,13 +102,26 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    fun reload() {
+        binding.mainViewPager.adapter = MainPagerAdapter(this)
+        binding.mainViewPager.adapter?.notifyDataSetChanged()
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
+    }
+
     class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+        private val fragments = listOf(
+                MainPages.HOME.fragment,
+                MainPages.SEARCH.fragment,
+                MainPages.STOCKS.fragment,
+                MainPages.USER.fragment
+        )
+
         override fun getItemCount(): Int {
-            return MainPages.values().size
+            return fragments.size
         }
 
         override fun createFragment(position: Int): Fragment {
-            return MainPages.values()[position].fragment
+            return fragments[position]
         }
     }
 }

@@ -28,6 +28,10 @@ class StocksViewModel @ViewModelInject constructor(
     private var stocksPostsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
 
     init {
+        fetchLoginState()
+    }
+
+    internal fun fetchLoginState() {
         if (TokenHolder().load() != null) {
             loginStateLiveData.postValue(true)
         } else {

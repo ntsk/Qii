@@ -15,6 +15,7 @@ import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,7 +131,7 @@ class UserFragment : Fragment() {
                 .setPositiveButton("Yes") { _, _ ->
                     viewModel.deleteToken()
                     Toast.makeText(context, R.string.message_success_logout, Toast.LENGTH_LONG).show()
-                    activity?.recreate()
+                    (activity as? MainActivity)?.reload()
                 }
                 .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
                 .show()

@@ -39,7 +39,6 @@ class StocksFragment : Fragment() {
         return view
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
@@ -63,5 +62,9 @@ class StocksFragment : Fragment() {
         binding.fragmentStocksPleaseLogin.layout_please_login_button.setOnClickListener {
             startActivity(LoginIntentBuilder.build())
         }
+    }
+
+    fun refresh() {
+        viewModel.fetchLoginState()
     }
 }
