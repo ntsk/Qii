@@ -1,5 +1,6 @@
 package com.qii.ntsk.qii.model.entity
 
+import com.qii.ntsk.qii.utils.DateFormatUtil
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.io.Serializable
@@ -38,4 +39,12 @@ data class Post(
 
         @Json(name = "url")
         val url: String
-) : Serializable
+) : Serializable {
+    fun tagsString(): String {
+        return tags.joinToString(separator = ", ") { "#${it.name}" }
+    }
+
+    fun formattedCreatedAt(): String {
+        return DateFormatUtil.formatTimeAndDate(createdAt)
+    }
+}

@@ -6,7 +6,6 @@ import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.ModelViewListLoadingBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
-import com.qii.ntsk.qii.utils.DateFormatUtil
 
 class NewPostsController(private val onItemClick: (Post) -> Unit) : PagedListEpoxyController<Post>() {
     var isLoading = false
@@ -18,15 +17,12 @@ class NewPostsController(private val onItemClick: (Post) -> Unit) : PagedListEpo
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
         return ModelPostItemBindingModel_()
                 .id(item?.id)
-                .title(item?.title)
-                .description(item?.body)
-                .userImageUrl(item?.user?.profileImageUrl)
+                .post(item)
                 .clickListener(View.OnClickListener {
                     if (item?.url != null) {
                         onItemClick(item)
                     }
                 })
-                .date(DateFormatUtil.formatTimeAndDate(item?.createdAt ?: ""))
     }
 
     override fun addModels(models: List<EpoxyModel<*>>) {

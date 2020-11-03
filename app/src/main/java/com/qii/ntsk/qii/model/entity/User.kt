@@ -49,4 +49,8 @@ data class User(
 
         @Json(name = "items_count")
         val itemsCount: Int
-)
+) {
+    fun idWithAtSign(): String {
+        return "@$id"
+    }
+}
