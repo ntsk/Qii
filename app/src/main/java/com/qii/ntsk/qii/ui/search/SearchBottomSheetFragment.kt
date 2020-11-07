@@ -14,11 +14,12 @@ import com.qii.ntsk.qii.databinding.FragmentSearchBottomSheetBinding
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.SearchQueryStore
+import com.qii.ntsk.qii.widget.autoCleared
 
 class SearchBottomSheetFragment : BottomSheetDialogFragment() {
-    private var filterStateChangeListener: FilterStateChangeListener? = null
+    private var binding: FragmentSearchBottomSheetBinding by autoCleared()
+    private var filterStateChangeListener: FilterStateChangeListener by autoCleared()
     private val controller = SearchBottomSheetController()
-    private lateinit var binding: FragmentSearchBottomSheetBinding
     private lateinit var tags: List<Tag>
 
     override fun setupDialog(dialog: Dialog, style: Int) {

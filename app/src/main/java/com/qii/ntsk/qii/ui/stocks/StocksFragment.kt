@@ -12,6 +12,7 @@ import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject
@@ -19,8 +20,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StocksFragment : Fragment() {
     private val viewModel: StocksViewModel by viewModels()
+    private var binding: FragmentStocksBinding by autoCleared()
     private lateinit var controller: StocksController
-    private lateinit var binding: FragmentStocksBinding
 
     @Inject
     lateinit var userRepository: UserRepository

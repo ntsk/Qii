@@ -17,14 +17,15 @@ import com.qii.ntsk.qii.model.state.SearchQueryStore
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.QueryBuilder
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
+    private var binding: FragmentSearchBinding by autoCleared()
     private lateinit var controller: SearchController
-    private lateinit var binding: FragmentSearchBinding
 
     @Inject
     lateinit var postsRepository: PostsRepository

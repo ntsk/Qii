@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qii.ntsk.qii.R
@@ -13,9 +12,10 @@ import com.qii.ntsk.qii.databinding.FragmentHomeBinding
 import com.qii.ntsk.qii.ui.home.newposts.NewPostsFragment
 import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsFragment
 import com.qii.ntsk.qii.ui.stocks.StocksFragment
+import com.qii.ntsk.qii.widget.autoCleared
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private var binding: FragmentHomeBinding by autoCleared()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

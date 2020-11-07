@@ -12,14 +12,15 @@ import com.qii.ntsk.qii.databinding.FragmentNewPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.utils.CustomTabsStarter
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewPostsFragment : Fragment() {
     private val viewModel: NewPostsViewModel by viewModels()
+    private var binding: FragmentNewPostsBinding by autoCleared()
     private lateinit var controller: NewPostsController
-    private lateinit var binding: FragmentNewPostsBinding
 
     @Inject
     lateinit var repository: PostsRepository

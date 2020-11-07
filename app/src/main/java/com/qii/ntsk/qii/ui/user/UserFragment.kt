@@ -17,6 +17,7 @@ import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.ui.MainActivity
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject
@@ -24,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UserFragment : Fragment() {
     private val viewModel: UserViewModel by viewModels()
-    private lateinit var binding: FragmentUserBinding
+    private var binding: FragmentUserBinding by autoCleared()
     private lateinit var controller: UserItemsController
 
     @Inject
