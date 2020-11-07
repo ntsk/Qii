@@ -22,11 +22,18 @@
         <item name="android:drawableStart">@drawable/tag_dot</item>
     </style>
 
-    <style name="SearchBottomSheetTheme" parent="Animation.Design.BottomSheetDialog">
+    <style name="SearchBottomSheetTheme" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/SearchBottomSheetModal</item>
     </style>
 
     <style name="SearchBottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/search_bottom_sheet_background</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 </resources>
