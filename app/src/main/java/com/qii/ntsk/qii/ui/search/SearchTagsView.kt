@@ -11,23 +11,23 @@ import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
-import com.qii.ntsk.qii.databinding.ViewTagsBinding
+import com.qii.ntsk.qii.databinding.ViewSearchTagsBinding
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.state.SearchQueryStore
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
-class TagsView @JvmOverloads constructor(
+class SearchTagsView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
-    private val binding: ViewTagsBinding = ViewTagsBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding: ViewSearchTagsBinding = ViewSearchTagsBinding.inflate(LayoutInflater.from(context), this, true)
 
     @ModelProp
     fun setTags(tags: List<Tag>) {
         binding.viewTagsChipGroup.removeAllViews()
         tags.forEachIndexed { index, tag ->
-            val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_tag_chip, binding.viewTagsChipGroup, false) as Chip
+            val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_search_tag_chip, binding.viewTagsChipGroup, false) as Chip
             binding.viewTagsChipGroup.addView(chip.also {
                 it.id = View.generateViewId()
                 it.text = tag.id

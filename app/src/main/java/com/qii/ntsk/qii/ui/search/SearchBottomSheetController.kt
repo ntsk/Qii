@@ -11,7 +11,7 @@ class SearchBottomSheetController : EpoxyController() {
     lateinit var searchWordView: SearchWordViewModel_
 
     @AutoModel
-    lateinit var tagsView: TagsViewModel_
+    lateinit var tagsView: SearchTagsViewModel_
 
     override fun buildModels() {
         if (tags.isEmpty()) return
