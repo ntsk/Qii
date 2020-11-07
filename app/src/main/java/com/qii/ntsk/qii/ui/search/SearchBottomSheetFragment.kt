@@ -1,9 +1,11 @@
 package com.qii.ntsk.qii.ui.search
 
 import android.app.Dialog
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -11,7 +13,7 @@ import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBottomSheetBinding
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Tags
-import com.qii.ntsk.qii.model.state.TagsStore
+import com.qii.ntsk.qii.model.state.SearchQueryStore
 
 class SearchBottomSheetFragment : BottomSheetDialogFragment() {
     private var filterStateChangeListener: FilterStateChangeListener? = null
@@ -21,9 +23,16 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun setupDialog(dialog: Dialog, style: Int) {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_search_bottom_sheet, null, false)
-        view.viewTreeObserver.addOnGlobalLayoutListener {
+        binding = FragmentSearchBottomSheetBinding.bind(view)
+
+        view.doOnLayout {
             val behavior = BottomSheetBehavior.from(view.parent as View)
-            behavior.peekHeight = view.height
+            val windowHeight = Resources.getSystem().displayMetrics.heightPixels
+            behavior.peekHeight = windowHeight
+            behavior.skipCollapsed = true
+            behavior.isHideable = false
+            behavior.isDraggable = false
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         arguments?.get(BUNDLE_KEY_SEARCH_BOTTOM_SHEET).let { argument ->
@@ -32,7 +41,6 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         controller.tags = tags
-        binding = FragmentSearchBottomSheetBinding.bind(view)
         binding.fragmentSearchBottomSheetRecyclerView.setController(controller)
         binding.fragmentSearchBottomSheetRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.fragmentSearchBottomSheetClear.setOnClickListener {
@@ -44,13 +52,14 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         controller.requestModelBuild()
+
         dialog.setContentView(view)
     }
 
     private fun clear() {
         val controller = SearchBottomSheetController()
-        TagsStore.clear()
-        controller.tags = TagsStore.getList()
+        SearchQueryStore.clearTags()
+        controller.tags = SearchQueryStore.getTagsList()
         binding.fragmentSearchBottomSheetRecyclerView.setController(controller)
         controller.requestModelBuild()
         this.filterStateChangeListener?.onStateChanged()

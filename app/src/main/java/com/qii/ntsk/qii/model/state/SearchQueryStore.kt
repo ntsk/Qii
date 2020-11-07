@@ -3,18 +3,23 @@ package com.qii.ntsk.qii.model.state
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Tags
 
-object TagsStore {
+object SearchQueryStore {
+    private var word: String = ""
     private var tags: List<Tag> = listOf()
 
-    fun add(tags: Tags) {
+    fun addWord(word: String) {
+        this.word = word
+    }
+
+    fun addTags(tags: Tags) {
         this.tags = tags.tags
     }
 
-    fun add(tags: List<Tag>) {
+    fun addTags(tags: List<Tag>) {
         this.tags = tags
     }
 
-    fun update(tag: Tag) {
+    fun updateTags(tag: Tag) {
         tags.map {
             if (it.id == tag.id) {
                 return@map tag
@@ -23,19 +28,27 @@ object TagsStore {
         }
     }
 
-    fun get(): Tags {
+    fun getWord(): String {
+        return word;
+    }
+
+    fun getTags(): Tags {
         return Tags(this.tags)
     }
 
-    fun getList(): List<Tag> {
+    fun getTagsList(): List<Tag> {
         return this.tags
     }
 
-    fun getSelectedList(): List<Tag> {
+    fun getSelectedTagsList(): List<Tag> {
         return this.tags.filter { it.isSelected }
     }
 
-    fun clear() {
+    fun clearWord() {
+        word = ""
+    }
+
+    fun clearTags() {
         tags = tags.map { tag ->
             tag.isSelected = false
             tag

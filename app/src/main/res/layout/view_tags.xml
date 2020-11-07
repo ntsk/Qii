@@ -2,15 +2,28 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sub_wide">
+
+        <TextView
+            android:id="@+id/view_tags_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/spacing_sub_medium"
+            android:text="@string/label_popular_tags"
+            android:textSize="@dimen/text_sub_header"
+            android:textStyle="bold" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/view_tags_chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/view_tags_title"
             app:chipSpacingHorizontal="@dimen/spacing_sub_narrow"
             app:chipSpacingVertical="0dp" />
-    </FrameLayout>
+    </RelativeLayout>
 </layout>

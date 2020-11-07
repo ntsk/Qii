@@ -13,7 +13,7 @@ import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagsBinding
 import com.qii.ntsk.qii.model.entity.Tag
-import com.qii.ntsk.qii.model.state.TagsStore
+import com.qii.ntsk.qii.model.state.SearchQueryStore
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class TagsView @JvmOverloads constructor(
@@ -21,7 +21,7 @@ class TagsView @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
-    private var binding: ViewTagsBinding = ViewTagsBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding: ViewTagsBinding = ViewTagsBinding.inflate(LayoutInflater.from(context), this, true)
 
     @ModelProp
     fun setTags(tags: List<Tag>) {
@@ -34,7 +34,7 @@ class TagsView @JvmOverloads constructor(
                 it.chipIcon = generateColorDrawable(index)
                 it.setOnClickListener {
                     tag.isSelected = chip.isChecked
-                    TagsStore.update(tag)
+                    SearchQueryStore.updateTags(tag)
                 }
                 it.isChecked = tag.isSelected
             })

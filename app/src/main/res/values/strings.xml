@@ -22,4 +22,6 @@
     <string name="message_fail_login">Login failed. Please try again later.</string>
 
     <string name="id_with_at">\@%s</string>
+
+    <string name="label_popular_tags">Popular Tags</string>
 </resources>
