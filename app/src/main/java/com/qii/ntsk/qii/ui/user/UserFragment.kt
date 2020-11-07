@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.google.android.material.appbar.AppBarLayout
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
@@ -21,7 +20,6 @@ import com.qii.ntsk.qii.utils.LoginIntentBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class UserFragment : Fragment() {
@@ -96,9 +94,6 @@ class UserFragment : Fragment() {
                 else -> false
             }
         }
-        binding.fragmentUserLoginView.fragmentUserLoginAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
-            binding.fragmentUserLoginView.fragmentUserLoginToolbarText.alpha = abs(i / appBarLayout.totalScrollRange.toFloat())
-        })
 
         viewModel.fetchAuthenticatedUser().observe(viewLifecycleOwner, Observer {
             binding.iconUrl = it.profileImageUrl
