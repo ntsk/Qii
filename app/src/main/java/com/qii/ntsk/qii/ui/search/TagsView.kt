@@ -13,7 +13,7 @@ import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagsBinding
 import com.qii.ntsk.qii.model.entity.Tag
-import com.qii.ntsk.qii.model.state.TagsState
+import com.qii.ntsk.qii.model.state.TagsStore
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class TagsView @JvmOverloads constructor(
@@ -34,7 +34,7 @@ class TagsView @JvmOverloads constructor(
                 it.chipIcon = generateColorDrawable(index)
                 it.setOnClickListener {
                     tag.isSelected = chip.isChecked
-                    TagsState.update(tag)
+                    TagsStore.update(tag)
                 }
                 it.isChecked = tag.isSelected
             })

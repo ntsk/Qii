@@ -8,12 +8,12 @@ class QueryBuilder {
         private var tags: List<Tag> = listOf()
         private var word: String = ""
 
-        fun setTags(tags: List<Tag>): QueryBuilder.Companion {
+        fun setTags(tags: List<Tag>): Companion {
             this.tags = tags
             return this
         }
 
-        fun setWord(word: String): QueryBuilder.Companion {
+        fun setWord(word: String): Companion {
             this.word = word
             return this
         }

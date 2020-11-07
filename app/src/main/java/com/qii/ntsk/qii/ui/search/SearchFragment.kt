@@ -15,7 +15,7 @@ import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.Status
-import com.qii.ntsk.qii.model.state.TagsState
+import com.qii.ntsk.qii.model.state.TagsStore
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.QueryBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,14 +56,14 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initSearchView()
 
-        val tagsState = TagsState.get()
-        if (tagsState == null) {
-            viewModel.fetchTags().observe(viewLifecycleOwner, Observer { tags ->
-                TagsState.addAll(tags)
-                initBottomSheet(tags)
+        val tags = TagsStore.getList()
+        if (tags.isEmpty()) {
+            viewModel.fetchTags().observe(viewLifecycleOwner, Observer {
+                TagsStore.add(it)
+                initBottomSheet(TagsStore.get())
             })
         } else {
-            initBottomSheet(tagsState)
+            initBottomSheet(TagsStore.get())
         }
     }
 
@@ -88,8 +88,8 @@ class SearchFragment : Fragment() {
     private fun initBottomSheet(tags: Tags) {
         binding.fragmentSearchPostsFab.setOnClickListener {
             val bottomSheet = SearchBottomSheetFragment.Builder(tags).build()
-            bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterCompleteListener {
-                override fun onComplete() {
+            bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterStateChangeListener {
+                override fun onStateChanged() {
                     showPosts()
                 }
             })
@@ -98,7 +98,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun showPosts() {
-        val tagList = TagsState.getList() ?: return
+        val tagList = TagsStore.getList() ?: listOf()
         val query = QueryBuilder.setTags(tagList).build()
 
         viewModel.search(query).observe(viewLifecycleOwner, Observer {

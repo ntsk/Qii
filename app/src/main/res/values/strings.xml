@@ -9,6 +9,7 @@
     <string name="tags">Tags</string>
 
     <string name="done">Done</string>
+    <string name="clear">Clear</string>
     <string name="reload">Reload</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>

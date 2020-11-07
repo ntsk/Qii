@@ -10,7 +10,9 @@ class SearchBottomSheetController : EpoxyController() {
     override fun buildModels() {
         if (tags.isEmpty()) return
 
-        TagsViewModel_().id("TagsViewModel").tags(tags).addTo(this)
-
+        TagsViewModel_()
+                .id(tags.hashCode())
+                .tags(tags)
+                .addTo(this)
     }
 }
