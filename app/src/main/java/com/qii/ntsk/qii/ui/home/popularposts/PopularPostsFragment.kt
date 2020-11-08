@@ -7,21 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PopularPostsFragment : Fragment() {
     private val viewModel: PopularPostsViewModel by viewModels()
+    private var binding: FragmentPopularPostsBinding by autoCleared()
     private lateinit var controller: PopularPostsController
-    private lateinit var binding: FragmentPopularPostsBinding
 
     @Inject
     lateinit var repository: PostsRepository
@@ -30,16 +29,18 @@ class PopularPostsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_popular_posts, container, false)
         binding = FragmentPopularPostsBinding.bind(view)
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         controller = PopularPostsController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
-        val recyclerView = binding.fragmentPopularPostsRecyclerView
-        recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentPopularPostsRecyclerView.setController(controller)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.popularPostsObserver.observe(viewLifecycleOwner, Observer { pagedList ->
             controller.submitList(pagedList)
             controller.requestModelBuild()
@@ -53,6 +54,5 @@ class PopularPostsFragment : Fragment() {
                 else -> controller.isLoading = false
             }
         })
-        return view
     }
 }

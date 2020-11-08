@@ -3,31 +3,25 @@ package com.qii.ntsk.qii.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ActivityMainBinding
-import com.qii.ntsk.qii.ui.stocks.StocksFragment
-import com.qii.ntsk.qii.model.entity.Post
 import com.qii.ntsk.qii.datasource.holder.TokenHolder
 import com.qii.ntsk.qii.datasource.repository.TokenRepository
-import com.qii.ntsk.qii.ui.detail.PostDetailFragment
-import com.qii.ntsk.qii.ui.home.HomeFragment
-import com.qii.ntsk.qii.ui.search.SearchFragment
-import com.qii.ntsk.qii.ui.user.UserFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     companion object {
-        private const val FRAGMENT_ID = R.id.fragment_container
         private const val AUTHORIZE_CALLBACK_URI = "qii://callback"
     }
 
@@ -42,43 +36,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val homeFragment = HomeFragment()
-        val stocksFragment = StocksFragment()
-        val searchFragment = SearchFragment()
-        val userFragment = UserFragment()
+        val pagerAdapter = MainPagerAdapter(this)
+        binding.mainViewPager.let {
+            it.adapter = pagerAdapter
+            it.offscreenPageLimit = pagerAdapter.itemCount
+            it.isUserInputEnabled = false
+        }
 
-        setDefaultFragment(homeFragment)
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
+        binding.bottomNavigation.menu.findItem(R.id.nav_home).isChecked = true
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
-                    replaceFragment(homeFragment)
+                    binding.mainViewPager.setCurrentItem(MainPages.HOME.ordinal, false)
+                    true
                 }
                 R.id.nav_search -> {
-                    replaceFragment(searchFragment)
-                }
-                R.id.nav_stocks -> {
-                    replaceFragment(stocksFragment)
+                    binding.mainViewPager.setCurrentItem(MainPages.SEARCH.ordinal, false)
+                    true
                 }
                 R.id.nav_user -> {
-                    replaceFragment(userFragment)
+                    binding.mainViewPager.setCurrentItem(MainPages.USER.ordinal, false)
+                    true
+                }
+                R.id.nav_settings -> {
+                    binding.mainViewPager.setCurrentItem(MainPages.SETTINGS.ordinal, false)
+                    true
                 }
                 else -> {
-                    replaceFragment(homeFragment)
+                    binding.mainViewPager.currentItem = MainPages.HOME.ordinal
+                    true
                 }
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.nav_home
-        binding.bottomNavigation.menu.findItem(R.id.nav_home).isChecked = true
     }
 
     override fun onBackPressed() {
-        val currentFragment = supportFragmentManager.findFragmentById(FRAGMENT_ID)
-        if (currentFragment is PostDetailFragment) {
-            supportFragmentManager.popBackStack()
-            showBottomNavigation()
-            return
-        }
-
         AlertDialog.Builder(this)
                 .setTitle("Confirm")
                 .setMessage("Are you sure you want to quit?")
@@ -92,7 +85,6 @@ class MainActivity : AppCompatActivity() {
         if (uri != null && uri.toString().contains(AUTHORIZE_CALLBACK_URI)) {
             authorize(uri)
         }
-
         super.onNewIntent(intent)
     }
 
@@ -102,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             val tokenHolder = TokenHolder()
             tokenHolder.save(it.token)
             Toast.makeText(this, R.string.message_success_login, Toast.LENGTH_LONG).show()
-            reloadViews()
+            reload()
         })
 
         viewModel.errorObserver.observe(this, Observer {
@@ -110,39 +102,26 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun <F> setDefaultFragment(fragment: F) where F : Fragment {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(FRAGMENT_ID, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    fun reload() {
+        binding.mainViewPager.adapter = MainPagerAdapter(this)
+        binding.mainViewPager.adapter?.notifyDataSetChanged()
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
     }
 
-    private fun <F> replaceFragment(fragment: F): Boolean where F : Fragment {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(FRAGMENT_ID, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-        return true
-    }
+    class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+        private val fragments = listOf(
+                MainPages.HOME.fragment,
+                MainPages.SEARCH.fragment,
+                MainPages.USER.fragment,
+                MainPages.SETTINGS.fragment
+        )
 
-    fun reloadViews() {
-        val currentFragment = supportFragmentManager.findFragmentById(FRAGMENT_ID)
-        if (currentFragment != null) {
-            supportFragmentManager.beginTransaction().remove(currentFragment).commit()
+        override fun getItemCount(): Int {
+            return fragments.size
         }
-        recreate()
-    }
 
-    fun showPostDetail(post: Post) {
-        val fragment = PostDetailFragment.Builder(post).build()
-        replaceFragment(fragment)
-    }
-
-    fun showBottomNavigation() {
-        binding.bottomNavigation.visibility = View.VISIBLE
-    }
-
-    fun hideBottomNavigation() {
-        binding.bottomNavigation.visibility = View.GONE
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
     }
 }

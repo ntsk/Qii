@@ -21,43 +21,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Toolbar
-            android:id="@+id/fragment_search_toolbar"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/fragment_search_search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/shape_tab_layout_background"
             android:elevation="4dp"
+            android:paddingStart="@dimen/spacing_sub_wide"
+            android:paddingEnd="@dimen/spacing_sub_wide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/search"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </Toolbar>
-
-        <com.airbnb.epoxy.EpoxyRecyclerView
+        <com.qii.ntsk.qii.widget.PostsRecyclerView
             android:id="@+id/fragment_search_posts_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_search_posts_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_sub_wide"
+            android:layout_marginEnd="@dimen/spacing_sub_wide"
+            android:layout_marginBottom="92dp"
             android:src="@drawable/ic_search"
+            app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:backgroundTint="@color/colorPrimary"
             app:tint="@color/white" />
 
         <include
@@ -67,7 +61,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
 
         <include
             android:id="@+id/fragment_search_empty"
@@ -76,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
 
         <include
             android:id="@+id/fragment_search_loading"
@@ -87,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

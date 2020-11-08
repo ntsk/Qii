@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject
@@ -21,8 +20,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StocksFragment : Fragment() {
     private val viewModel: StocksViewModel by viewModels()
+    private var binding: FragmentStocksBinding by autoCleared()
     private lateinit var controller: StocksController
-    private lateinit var binding: FragmentStocksBinding
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -31,17 +30,15 @@ class StocksFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_stocks, container, false)
         binding = FragmentStocksBinding.bind(view)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         controller = StocksController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
-        val recyclerView = binding.fragmentFavoriteRecyclerView
-        recyclerView.setController(controller)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        binding.fragmentFavoriteRecyclerView.setController(controller)
         return view
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,5 +63,9 @@ class StocksFragment : Fragment() {
         binding.fragmentStocksPleaseLogin.layout_please_login_button.setOnClickListener {
             startActivity(LoginIntentBuilder.build())
         }
+    }
+
+    fun refresh() {
+        viewModel.fetchLoginState()
     }
 }

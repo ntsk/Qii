@@ -1,31 +1,50 @@
 package com.qii.ntsk.qii.model.entity
 
+import com.qii.ntsk.qii.utils.DateFormatUtil
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Post(
-        val id: String?,
-        val title: String?,
-        val body: String?,
+        @Json(name = "id")
+        val id: String,
 
-        @Json(name = "comment_count")
-        val commentsCount: Int?,
+        @Json(name = "title")
+        val title: String,
+
+        @Json(name = "body")
+        val body: String,
+
+        @Json(name = "comments_count")
+        val commentsCount: Int,
 
         @Json(name = "likes_count")
-        val likesCount: Int?,
+        val likesCount: Int,
 
         @Json(name = "page_views_count")
         val pageViewsCount: Int?,
 
         @Json(name = "created_at")
-        val createdAt: String?,
+        val createdAt: String,
 
         @Json(name = "updated_at")
-        val updated_at: String?,
+        val updatedAt: String,
 
-        val tags: List<Tag>?,
-        val user: User?,
-        val url: String?
-): Serializable
+        @Json(name = "tags")
+        val tags: List<Tagging>,
+
+        @Json(name = "user")
+        val user: User,
+
+        @Json(name = "url")
+        val url: String
+) : Serializable {
+    fun tagsString(): String {
+        return tags.joinToString(separator = ", ") { "#${it.name}" }
+    }
+
+    fun formattedCreatedAt(): String {
+        return DateFormatUtil.formatTimeAndDate(createdAt)
+    }
+}

@@ -9,25 +9,23 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentUserBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepositoryImpl
 import com.qii.ntsk.qii.model.state.LoginState
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
+import com.qii.ntsk.qii.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class UserFragment : Fragment() {
     private val viewModel: UserViewModel by viewModels()
-    private lateinit var binding: FragmentUserBinding
+    private var binding: FragmentUserBinding by autoCleared()
     private lateinit var controller: UserItemsController
 
     @Inject
@@ -42,6 +40,11 @@ class UserFragment : Fragment() {
 
         binding.fragmentUserLogoutView.root.visibility = View.GONE
         binding.fragmentUserLoginView.root.visibility = View.GONE
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.loginStateLiveData.observe(viewLifecycleOwner, Observer { loginState ->
             when (loginState) {
                 LoginState.LOGOUT -> showLogoutView()
@@ -49,7 +52,6 @@ class UserFragment : Fragment() {
                 else -> showLoginView()
             }
         })
-        return binding.root
     }
 
     private fun showLogoutView() {
@@ -60,18 +62,6 @@ class UserFragment : Fragment() {
         binding.fragmentUserLogoutView.layoutUserLogoutEmpty.layout_please_login_button.setOnClickListener {
             login()
         }
-
-        val toolbar = binding.fragmentUserLogoutView.layoutUserLogoutToolbar
-        toolbar.inflateMenu(R.menu.menu_user_login)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.login -> {
-                    login()
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     private fun showLoginView() {
@@ -80,25 +70,9 @@ class UserFragment : Fragment() {
         binding.fragmentUserLoading.root.visibility = View.GONE
 
         controller = UserItemsController { post ->
-            val activity = requireActivity() as MainActivity
-            activity.showPostDetail(post)
+            CustomTabsStarter.start(requireContext(), post.url)
         }
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
-        binding.fragmentUserLoginView.layoutUserLoginRecyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
-        binding.fragmentUserLoginView.layoutUserLoginToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.logout -> {
-                    logout()
-                    true
-                }
-                else -> false
-            }
-        }
-        binding.fragmentUserLoginView.fragmentUserLoginAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
-            binding.fragmentUserLoginView.fragmentUserLoginToolbarText.alpha = abs(i / appBarLayout.totalScrollRange.toFloat())
-        })
-
         viewModel.fetchAuthenticatedUser().observe(viewLifecycleOwner, Observer {
             binding.iconUrl = it.profileImageUrl
             binding.fragmentUserLoginView.layoutUserLoginUserId.text = resources.getString(R.string.id_with_at, it.id)
@@ -130,8 +104,7 @@ class UserFragment : Fragment() {
                 .setPositiveButton("Yes") { _, _ ->
                     viewModel.deleteToken()
                     Toast.makeText(context, R.string.message_success_logout, Toast.LENGTH_LONG).show()
-                    val activity = activity as MainActivity
-                    activity.reloadViews()
+                    (activity as? MainActivity)?.reload()
                 }
                 .setNegativeButton("No") { dialogInterface, _ -> dialogInterface.dismiss() }
                 .show()

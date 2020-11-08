@@ -6,20 +6,8 @@
     <data>
 
         <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="description"
-            type="String" />
-
-        <variable
-            name="userImageUrl"
-            type="String" />
-
-        <variable
-            name="date"
-            type="String" />
+            name="post"
+            type="com.qii.ntsk.qii.model.entity.Post" />
 
         <variable
             name="clickListener"
@@ -30,18 +18,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{clickListener}"
         android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{clickListener}"
         android:padding="@dimen/spacing_sub_wide">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/icon_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:imageUrl="@{userImageUrl}"
+            app:imageUrl="@{post.user.profileImageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true"
             tools:background="@color/colorAccent" />
 
         <TextView
@@ -49,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
-            android:text="@{title}"
+            android:text="@{post.title}"
             android:textSize="@dimen/text_sub_header"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/icon_image"
@@ -57,18 +46,42 @@
             tools:text="Design" />
 
         <TextView
-            android:id="@+id/post_description"
+            android:id="@+id/post_tags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
             android:layout_marginTop="@dimen/spacing_narrow"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{description}"
+            android:text="@{post.tagsString()}"
             android:textSize="@dimen/text_body"
             app:layout_constraintStart_toEndOf="@id/icon_image"
             app:layout_constraintTop_toBottomOf="@id/post_title"
             tools:text="Create intuitive and beautiful products with Material Design." />
+
+        <TextView
+            android:id="@+id/post_lgtm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sub_wide"
+            android:text="@{post.likesCount + ` LGTM` }"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_image"
+            tools:text="0 LGTM" />
+
+        <TextView
+            android:id="@+id/post_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_narrow"
+            android:text="@{post.user.idWithAtSign()}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_tags"
+            tools:text="ntsk" />
 
         <TextView
             android:id="@+id/post_date"
@@ -76,10 +89,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
             android:layout_marginTop="@dimen/spacing_narrow"
-            android:text="@{date}"
+            android:text="@{post.formattedCreatedAt()}"
             android:textSize="@dimen/text_caption"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_description"
+            app:layout_constraintTop_toBottomOf="@id/post_user_id"
             tools:text="5days ago" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

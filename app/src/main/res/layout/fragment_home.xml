@@ -2,50 +2,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <FrameLayout
+            android:id="@+id/home_tab_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
-
-            <Toolbar
-                android:id="@+id/fragment_home_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:elevation="4dp"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </Toolbar>
+            android:background="@drawable/shape_tab_layout_background"
+            android:elevation="4dp">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/home_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:elevation="4dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_tab_layout_background"
                 app:tabGravity="fill"
+                app:tabIndicatorHeight="0dp"
                 app:tabMaxWidth="0dp"
                 app:tabMode="fixed" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </FrameLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/home_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/home_tab_frame"
             android:orientation="horizontal"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 </layout>
