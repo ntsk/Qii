@@ -60,6 +60,7 @@ class SearchFragment : Fragment() {
 
     private fun initSearchView() {
         binding.fragmentSearchSearchView.let { view ->
+            view.isIconified = false
             val queryTextListener = object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     view.clearFocus()
@@ -75,7 +76,6 @@ class SearchFragment : Fragment() {
             view.setOnQueryTextListener(queryTextListener)
             view.setQuery(SearchQueryStore.getWord(), false)
             view.clearFocus()
-            view.isIconified = false
         }
     }
 
