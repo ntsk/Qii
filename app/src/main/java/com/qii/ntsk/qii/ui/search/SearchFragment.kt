@@ -81,20 +81,26 @@ class SearchFragment : Fragment() {
 
     private fun initBottomSheet() {
         val tags = SearchQueryStore.getTagsList()
-        if (tags.isEmpty()) {
-            viewModel.fetchTags().observe(viewLifecycleOwner, Observer {
-                SearchQueryStore.addTags(it)
-                binding.fragmentSearchPostsFab.setOnClickListener {
-                    val bottomSheet = SearchBottomSheetFragment.Builder(SearchQueryStore.getTags()).build()
-                    bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterStateChangeListener {
-                        override fun onStateChanged() {
-                            binding.fragmentSearchSearchView.setQuery(SearchQueryStore.getWord(), false)
-                            search()
-                        }
-                    })
-                    bottomSheet.show(childFragmentManager, bottomSheet.tag)
+        if (tags.isNotEmpty()) {
+            initFab()
+            return
+        }
+        viewModel.fetchTags().observe(viewLifecycleOwner, Observer {
+            SearchQueryStore.addTags(it)
+            initFab()
+        })
+    }
+
+    private fun initFab() {
+        binding.fragmentSearchPostsFab.setOnClickListener {
+            val bottomSheet = SearchBottomSheetFragment.Builder(SearchQueryStore.getTags()).build()
+            bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterStateChangeListener {
+                override fun onStateChanged() {
+                    binding.fragmentSearchSearchView.setQuery(SearchQueryStore.getWord(), false)
+                    search()
                 }
             })
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
     }
 
