@@ -62,18 +62,6 @@ class UserFragment : Fragment() {
         binding.fragmentUserLogoutView.layoutUserLogoutEmpty.layout_please_login_button.setOnClickListener {
             login()
         }
-
-        val toolbar = binding.fragmentUserLogoutView.layoutUserLogoutToolbar
-        toolbar.inflateMenu(R.menu.menu_user_login)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.login -> {
-                    login()
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     private fun showLoginView() {
@@ -85,17 +73,6 @@ class UserFragment : Fragment() {
             CustomTabsStarter.start(requireContext(), post.url)
         }
         binding.fragmentUserLoginView.layoutUserLoginRecyclerView.setController(controller)
-        binding.fragmentUserLoginView.layoutUserLoginToolbar.inflateMenu(R.menu.menu_user_logout)
-        binding.fragmentUserLoginView.layoutUserLoginToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.logout -> {
-                    logout()
-                    true
-                }
-                else -> false
-            }
-        }
-
         viewModel.fetchAuthenticatedUser().observe(viewLifecycleOwner, Observer {
             binding.iconUrl = it.profileImageUrl
             binding.fragmentUserLoginView.layoutUserLoginUserId.text = resources.getString(R.string.id_with_at, it.id)

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="subTitle"
+            type="String" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{clickListener}">
+
+        <TextView
+            android:id="@+id/model_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sub_wide"
+            android:layout_marginTop="@dimen/spacing_sub_wide"
+            android:layout_marginEnd="@dimen/spacing_sub_wide"
+            android:layout_marginBottom="@dimen/spacing_sub_narrow"
+            android:maxLines="1"
+            android:text="@{title}"
+            android:textSize="@dimen/text_sub_header"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:id="@+id/model_settings_sub_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/model_settings_title"
+            android:layout_marginStart="@dimen/spacing_sub_wide"
+            android:layout_marginEnd="@dimen/spacing_sub_wide"
+            android:layout_marginBottom="@dimen/spacing_sub_wide"
+            android:text="@{subTitle}"
+            android:textSize="@dimen/text_body" />
+
+    </RelativeLayout>
+
+</layout>

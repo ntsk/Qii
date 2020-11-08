@@ -7,7 +7,10 @@ import com.qii.ntsk.qii.ModelPostItemBindingModel_
 import com.qii.ntsk.qii.ModelViewListLoadingBindingModel_
 import com.qii.ntsk.qii.model.entity.Post
 
-class NewPostsController(private val onItemClick: (Post) -> Unit) : PagedListEpoxyController<Post>() {
+class NewPostsController(
+        private val onItemClick: (Post) -> Unit)
+    : PagedListEpoxyController<Post>() {
+
     var isLoading = false
         set(value) {
             field = value

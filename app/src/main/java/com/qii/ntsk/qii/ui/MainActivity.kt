@@ -55,12 +55,12 @@ class MainActivity : AppCompatActivity() {
                     binding.mainViewPager.setCurrentItem(MainPages.SEARCH.ordinal, false)
                     true
                 }
-                R.id.nav_stocks -> {
-                    binding.mainViewPager.setCurrentItem(MainPages.STOCKS.ordinal, false)
-                    true
-                }
                 R.id.nav_user -> {
                     binding.mainViewPager.setCurrentItem(MainPages.USER.ordinal, false)
+                    true
+                }
+                R.id.nav_settings -> {
+                    binding.mainViewPager.setCurrentItem(MainPages.SETTINGS.ordinal, false)
                     true
                 }
                 else -> {
@@ -112,8 +112,8 @@ class MainActivity : AppCompatActivity() {
         private val fragments = listOf(
                 MainPages.HOME.fragment,
                 MainPages.SEARCH.fragment,
-                MainPages.STOCKS.fragment,
-                MainPages.USER.fragment
+                MainPages.USER.fragment,
+                MainPages.SETTINGS.fragment
         )
 
         override fun getItemCount(): Int {

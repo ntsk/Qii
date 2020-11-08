@@ -6,17 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Toolbar
-            android:id="@+id/layout_user_logout_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:title="@string/user"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <include
             android:id="@+id/layout_user_logout_empty"
             layout="@layout/layout_please_login"
