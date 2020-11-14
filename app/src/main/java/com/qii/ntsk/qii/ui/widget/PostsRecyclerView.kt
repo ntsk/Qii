@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.widget
+package com.qii.ntsk.qii.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet

@@ -14,7 +14,7 @@ import com.qii.ntsk.qii.databinding.FragmentSearchBottomSheetBinding
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.SearchQueryStore
-import com.qii.ntsk.qii.widget.autoCleared
+import com.qii.ntsk.qii.ui.widget.autoCleared
 
 class SearchBottomSheetFragment : BottomSheetDialogFragment() {
     private var binding: FragmentSearchBottomSheetBinding by autoCleared()

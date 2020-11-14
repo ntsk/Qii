@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.ui
+package com.qii.ntsk.qii.ui.main
 
 import androidx.fragment.app.Fragment
 import com.qii.ntsk.qii.ui.home.HomeFragment

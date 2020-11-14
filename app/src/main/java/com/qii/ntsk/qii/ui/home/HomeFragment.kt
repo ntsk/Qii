@@ -12,7 +12,7 @@ import com.qii.ntsk.qii.databinding.FragmentHomeBinding
 import com.qii.ntsk.qii.ui.home.newposts.NewPostsFragment
 import com.qii.ntsk.qii.ui.home.popularposts.PopularPostsFragment
 import com.qii.ntsk.qii.ui.stocks.StocksFragment
-import com.qii.ntsk.qii.widget.autoCleared
+import com.qii.ntsk.qii.ui.widget.autoCleared
 
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding by autoCleared()

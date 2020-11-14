@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/view_tags_title"
             app:chipSpacingHorizontal="@dimen/spacing_sub_narrow"
-            app:chipSpacingVertical="0dp" />
+            app:chipSpacingVertical="0dp"
+            />
     </RelativeLayout>
 </layout>

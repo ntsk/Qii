@@ -6,6 +6,7 @@
     <dimen name="text_sub_header">14sp</dimen>
     <dimen name="text_body">12sp</dimen>
     <dimen name="text_caption">10sp</dimen>
+    <dimen name="text_sub_caption">8sp</dimen>
 
     <!-- Space -->
     <dimen name="spacing_sub_narrow">4dp</dimen>

@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.ui
+package com.qii.ntsk.qii.ui.main
 
 import android.content.Intent
 import android.net.Uri

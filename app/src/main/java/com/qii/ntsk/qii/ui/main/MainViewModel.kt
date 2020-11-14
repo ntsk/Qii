@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.ui
+package com.qii.ntsk.qii.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData

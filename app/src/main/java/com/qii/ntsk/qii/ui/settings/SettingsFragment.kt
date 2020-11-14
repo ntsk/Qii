@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSettingsBinding
 import com.qii.ntsk.qii.model.state.LoginState
-import com.qii.ntsk.qii.ui.MainActivity
+import com.qii.ntsk.qii.ui.main.MainActivity
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
-import com.qii.ntsk.qii.widget.autoCleared
+import com.qii.ntsk.qii.ui.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.qii.ntsk.qii.widget
+package com.qii.ntsk.qii.ui.widget
 
 /*
  * Copyright (C) 2018 The Android Open Source Project

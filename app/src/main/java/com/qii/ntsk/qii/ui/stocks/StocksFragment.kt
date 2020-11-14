@@ -12,7 +12,7 @@ import com.qii.ntsk.qii.databinding.FragmentStocksBinding
 import com.qii.ntsk.qii.datasource.repository.UserRepository
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.LoginIntentBuilder
-import com.qii.ntsk.qii.widget.autoCleared
+import com.qii.ntsk.qii.ui.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_please_login.view.*
 import javax.inject.Inject

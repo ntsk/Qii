@@ -45,19 +45,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Design" />
 
-        <TextView
-            android:id="@+id/post_tags"
-            android:layout_width="wrap_content"
+        <com.qii.ntsk.qii.ui.widget.TagsChipView
+            android:id="@+id/post_tags_chip"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sub_wide"
             android:layout_marginTop="@dimen/spacing_narrow"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{post.tagsString()}"
-            android:textSize="@dimen/text_body"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_image"
             app:layout_constraintTop_toBottomOf="@id/post_title"
-            tools:text="Create intuitive and beautiful products with Material Design." />
+            app:tags="@{post.tags}" />
 
         <TextView
             android:id="@+id/post_lgtm"
@@ -80,7 +77,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_body"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_tags"
+            app:layout_constraintTop_toBottomOf="@id/post_tags_chip"
             tools:text="ntsk" />
 
         <TextView

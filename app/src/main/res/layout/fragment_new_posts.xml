@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.qii.ntsk.qii.widget.PostsRecyclerView
+        <com.qii.ntsk.qii.ui.widget.PostsRecyclerView
             android:id="@+id/fragment_new_posts_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"

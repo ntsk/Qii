@@ -12,7 +12,7 @@ import com.qii.ntsk.qii.databinding.FragmentPopularPostsBinding
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.model.state.Status
 import com.qii.ntsk.qii.utils.CustomTabsStarter
-import com.qii.ntsk.qii.widget.autoCleared
+import com.qii.ntsk.qii.ui.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
