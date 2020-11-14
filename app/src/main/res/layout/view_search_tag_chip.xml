@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:checkable="true"
     app:chipBackgroundColor="@color/white"
-    app:chipIconSize="18dp"
+    app:chipIconSize="10dp"
     app:chipStartPadding="8dp"
     app:chipStrokeColor="@color/gray"
     app:chipStrokeWidth="1dp"
