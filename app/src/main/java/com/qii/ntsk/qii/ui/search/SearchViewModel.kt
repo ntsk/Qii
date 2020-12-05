@@ -11,6 +11,7 @@ import com.qii.ntsk.qii.datasource.paging.PostsDataSource
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.entity.Post
+import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.entity.Tags
 import com.qii.ntsk.qii.model.state.NetworkState
 import kotlinx.coroutines.Dispatchers
@@ -26,12 +27,19 @@ class SearchViewModel @ViewModelInject constructor(
 
     var networkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
 
+    var tags : Tags = Tags(mutableListOf())
+
+    var searchWord: String = ""
+
+    var selectedTags: MutableList<Tag> = mutableListOf()
+
     internal fun fetchTags(): MutableLiveData<Tags> {
         viewModelScope.launch(Dispatchers.IO) {
             val tagsResponse = tagsRepository.fetch("1", "50", "count")
             val tagsBody = tagsResponse.body()
             if (tagsResponse.isSuccessful && tagsBody != null) {
-                tagsLiveData.postValue(Tags(tagsBody))
+                tags = Tags(tagsBody)
+                tagsLiveData.postValue(tags)
             }
         }
         return tagsLiveData

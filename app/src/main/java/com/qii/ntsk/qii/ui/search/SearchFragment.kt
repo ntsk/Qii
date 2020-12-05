@@ -10,14 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.FragmentSearchBinding
-import com.qii.ntsk.qii.datasource.holder.SearchQueryHolder
 import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
-import com.qii.ntsk.qii.model.state.SearchQueryStore
+import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.widget.autoCleared
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.QueryBuilder
-import com.qii.ntsk.qii.ui.widget.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -64,7 +63,7 @@ class SearchFragment : Fragment() {
             val queryTextListener = object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     view.clearFocus()
-                    SearchQueryStore.addWord(query ?: "")
+                    viewModel.searchWord = query ?: ""
                     search()
                     return true
                 }
@@ -74,29 +73,33 @@ class SearchFragment : Fragment() {
                 }
             }
             view.setOnQueryTextListener(queryTextListener)
-            view.setQuery(SearchQueryStore.getWord(), false)
+            view.setQuery(viewModel.searchWord, false)
             view.clearFocus()
         }
     }
 
     private fun initBottomSheet() {
-        val tags = SearchQueryStore.getTagsList()
+        val tags = viewModel.tags.tags
         if (tags.isNotEmpty()) {
             initFab()
             return
         }
         viewModel.fetchTags().observe(viewLifecycleOwner, Observer {
-            SearchQueryStore.addTags(it)
             initFab()
         })
     }
 
     private fun initFab() {
         binding.fragmentSearchPostsFab.setOnClickListener {
-            val bottomSheet = SearchBottomSheetFragment.Builder(SearchQueryStore.getTags()).build()
+            val bottomSheet = SearchBottomSheetFragment.Builder()
+                    .setQuery(viewModel.searchWord)
+                    .setTags(viewModel.tags)
+                    .build()
             bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterStateChangeListener {
-                override fun onStateChanged() {
-                    binding.fragmentSearchSearchView.setQuery(SearchQueryStore.getWord(), false)
+                override fun onStateChanged(query: String, selectedTags: List<Tag>) {
+                    viewModel.searchWord = query
+                    viewModel.selectedTags = selectedTags.toMutableList()
+                    binding.fragmentSearchSearchView.setQuery(query, false)
                     search()
                 }
             })
@@ -105,8 +108,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun search() {
-        val searchWord = SearchQueryStore.getWord()
-        val tagList = SearchQueryStore.getSelectedTagsList()
+        val searchWord = viewModel.searchWord
+        val tagList = viewModel.selectedTags
         val query = QueryBuilder()
                 .setWord(searchWord)
                 .setTags(tagList)
@@ -115,7 +118,6 @@ class SearchFragment : Fragment() {
         viewModel.search(query).observe(viewLifecycleOwner, Observer {
             binding.defaultEmpty = false
             controller.submitList(it)
-            SearchQueryHolder().save(query)
         })
 
         viewModel.networkStateObserver.observe(viewLifecycleOwner, Observer {

@@ -1,11 +1,17 @@
 package com.qii.ntsk.qii.ui.search
 
+import androidx.appcompat.widget.SearchView
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.qii.ntsk.qii.model.entity.Tag
 
-class SearchBottomSheetController : EpoxyController() {
-    var tags: List<Tag> = listOf()
+class SearchBottomSheetController(
+        var tags: List<Tag> = listOf(),
+        var query: String = "",
+        var queryTextListener: SearchView.OnQueryTextListener,
+        var tagsStateChangeListener: SearchTagsView.TagsStateChangeListener
+)
+    : EpoxyController() {
 
     @AutoModel
     lateinit var searchWordView: SearchWordViewModel_
@@ -15,7 +21,14 @@ class SearchBottomSheetController : EpoxyController() {
 
     override fun buildModels() {
         if (tags.isEmpty()) return
-        searchWordView.addTo(this)
-        tagsView.id(tags.hashCode()).tags(tags).addTo(this)
+        searchWordView
+                .defaultQuery(query)
+                .onQueryTextListener(queryTextListener)
+                .addTo(this)
+
+        tagsView
+                .tags(tags)
+                .tagsStateChangeListener(tagsStateChangeListener)
+                .addTo(this)
     }
 }

@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.SearchView
+import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.qii.ntsk.qii.databinding.ModelViewSearchWordBinding
-import com.qii.ntsk.qii.model.state.SearchQueryStore
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class SearchWordView @JvmOverloads constructor(
@@ -17,7 +17,10 @@ class SearchWordView @JvmOverloads constructor(
 
     private val binding = ModelViewSearchWordBinding.inflate(LayoutInflater.from(context), this, true)
 
+    private var queryTextListener: SearchView.OnQueryTextListener? = null
+
     init {
+/*
         binding.viewSearchWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 binding.viewSearchWord.clearFocus()
@@ -32,8 +35,19 @@ class SearchWordView @JvmOverloads constructor(
                 return false
             }
         })
+*/
         binding.viewSearchWord.isIconified = false
         binding.viewSearchWord.clearFocus()
-        binding.viewSearchWord.setQuery(SearchQueryStore.getWord(), false)
+        // binding.viewSearchWord.setQuery(SearchQueryStore.getWord(), false)
+    }
+
+    @ModelProp
+    fun setDefaultQuery(query: String) {
+        binding.viewSearchWord.setQuery(query, false)
+    }
+
+    @ModelProp(ModelProp.Option.DoNotHash)
+    fun setOnQueryTextListener(queryTextListener: SearchView.OnQueryTextListener) {
+        this.queryTextListener = queryTextListener
     }
 }

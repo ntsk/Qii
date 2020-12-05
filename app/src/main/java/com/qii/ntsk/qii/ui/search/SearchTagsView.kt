@@ -13,7 +13,6 @@ import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewSearchTagsBinding
 import com.qii.ntsk.qii.model.entity.Tag
-import com.qii.ntsk.qii.model.state.SearchQueryStore
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class SearchTagsView @JvmOverloads constructor(
@@ -22,9 +21,12 @@ class SearchTagsView @JvmOverloads constructor(
         defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
     private val binding: ViewSearchTagsBinding = ViewSearchTagsBinding.inflate(LayoutInflater.from(context), this, true)
+    private var tags = listOf<Tag>()
+    private var tagsStateChangeListener: TagsStateChangeListener? = null
 
     @ModelProp
     fun setTags(tags: List<Tag>) {
+        this.tags = tags
         binding.viewTagsChipGroup.removeAllViews()
         tags.forEachIndexed { index, tag ->
             val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_search_tag_chip, binding.viewTagsChipGroup, false) as Chip
@@ -34,11 +36,16 @@ class SearchTagsView @JvmOverloads constructor(
                 it.chipIcon = generateColorDrawable(index)
                 it.setOnClickListener {
                     tag.isSelected = chip.isChecked
-                    SearchQueryStore.updateTags(tag)
+                    tagsStateChangeListener?.onStateChanged(tags)
                 }
                 it.isChecked = tag.isSelected
             })
         }
+    }
+
+    @ModelProp(ModelProp.Option.DoNotHash)
+    fun setTagsStateChangeListener(tagsStateChangeListener: TagsStateChangeListener) {
+        this.tagsStateChangeListener = tagsStateChangeListener
     }
 
     private fun generateColorDrawable(index: Int): GradientDrawable {
@@ -49,5 +56,9 @@ class SearchTagsView @JvmOverloads constructor(
         materialColors.recycle()
         drawable.shape = GradientDrawable.OVAL
         return drawable
+    }
+
+    interface TagsStateChangeListener {
+        fun onStateChanged(tags: List<Tag>)
     }
 }
