@@ -54,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_image"
             app:layout_constraintTop_toBottomOf="@id/post_title"
-            app:tags="@{post.tags}" />
+            app:taggings="@{post.tags}" />
 
         <TextView
             android:id="@+id/post_lgtm"

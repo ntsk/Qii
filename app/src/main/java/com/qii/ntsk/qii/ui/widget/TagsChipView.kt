@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagChipsBinding
-import com.qii.ntsk.qii.model.entity.Tagging
 import kotlin.random.Random
 
 class TagsChipView @JvmOverloads constructor(
@@ -20,13 +19,13 @@ class TagsChipView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
     private val binding: ViewTagChipsBinding = ViewTagChipsBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setTags(tags: List<Tagging>) {
+    fun setTags(tags: List<String>) {
         binding.viewTagChips.removeAllViews()
         tags.forEachIndexed { index, tag ->
             val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_tag_chip, binding.viewTagChips, false) as Chip
             binding.viewTagChips.addView(chip.also {
                 it.id = View.generateViewId()
-                it.text = tag.name
+                it.text = tag
                 it.chipIcon = generateColorDrawable(index)
             })
         }
