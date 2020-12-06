@@ -1,6 +1,7 @@
 package com.qii.ntsk.qii.ui.search
 
 import android.app.Dialog
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -63,6 +64,13 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         dialog.setContentView(view)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (parentFragment is FilterStateChangeListener) {
+            this.filterStateChangeListener = parentFragment as FilterStateChangeListener
+        }
+    }
+
     private fun clear() {
         this.query = ""
         this.tags = tags.map {tag ->
@@ -104,10 +112,6 @@ class SearchBottomSheetFragment : BottomSheetDialogFragment() {
         )
         binding.fragmentSearchBottomSheetRecyclerView.setController(controller)
         controller.requestModelBuild()
-    }
-
-    fun setFilterCompleteListener(filterStateChangeListener: FilterStateChangeListener) {
-        this.filterStateChangeListener = filterStateChangeListener
     }
 
     class Builder {

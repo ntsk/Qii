@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchBottomSheetFragment.FilterStateChangeListener {
     private val viewModel: SearchViewModel by viewModels()
     private var binding: FragmentSearchBinding by autoCleared()
     private lateinit var controller: SearchController
@@ -55,6 +55,13 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initSearchView()
         initBottomSheet()
+    }
+
+    override fun onStateChanged(query: String, selectedTags: List<Tag>) {
+        viewModel.searchWord = query
+        viewModel.selectedTags = selectedTags.toMutableList()
+        binding.fragmentSearchSearchView.setQuery(query, false)
+        search()
     }
 
     private fun initSearchView() {
@@ -95,14 +102,6 @@ class SearchFragment : Fragment() {
                     .setQuery(viewModel.searchWord)
                     .setTags(viewModel.tags)
                     .build()
-            bottomSheet.setFilterCompleteListener(object : SearchBottomSheetFragment.FilterStateChangeListener {
-                override fun onStateChanged(query: String, selectedTags: List<Tag>) {
-                    viewModel.searchWord = query
-                    viewModel.selectedTags = selectedTags.toMutableList()
-                    binding.fragmentSearchSearchView.setQuery(query, false)
-                    search()
-                }
-            })
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
     }

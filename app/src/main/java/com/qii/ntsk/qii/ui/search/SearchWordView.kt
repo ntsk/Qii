@@ -17,28 +17,9 @@ class SearchWordView @JvmOverloads constructor(
 
     private val binding = ModelViewSearchWordBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var queryTextListener: SearchView.OnQueryTextListener? = null
-
     init {
-/*
-        binding.viewSearchWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                binding.viewSearchWord.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0 != null) {
-                    SearchQueryStore.addWord(p0)
-                    return true
-                }
-                return false
-            }
-        })
-*/
         binding.viewSearchWord.isIconified = false
         binding.viewSearchWord.clearFocus()
-        // binding.viewSearchWord.setQuery(SearchQueryStore.getWord(), false)
     }
 
     @ModelProp
@@ -48,6 +29,6 @@ class SearchWordView @JvmOverloads constructor(
 
     @ModelProp(ModelProp.Option.DoNotHash)
     fun setOnQueryTextListener(queryTextListener: SearchView.OnQueryTextListener) {
-        this.queryTextListener = queryTextListener
+        binding.viewSearchWord.setOnQueryTextListener(queryTextListener)
     }
 }
