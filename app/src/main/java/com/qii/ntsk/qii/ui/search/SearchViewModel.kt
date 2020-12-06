@@ -25,13 +25,19 @@ class SearchViewModel @ViewModelInject constructor(
 
     private var searchObserver: LiveData<PagedList<Post>> = MutableLiveData()
 
+    var selectedTagsLiveData: MutableLiveData<List<Tag>> = MutableLiveData(listOf())
+
     var networkStateObserver: MutableLiveData<NetworkState> = MutableLiveData()
 
     var tags : Tags = Tags(mutableListOf())
 
     var searchWord: String = ""
 
-    var selectedTags: MutableList<Tag> = mutableListOf()
+    var selectedTags: List<Tag> = listOf()
+    set(value) {
+        field = value
+        selectedTagsLiveData.value = value
+    }
 
     internal fun fetchTags(): MutableLiveData<Tags> {
         viewModelScope.launch(Dispatchers.IO) {

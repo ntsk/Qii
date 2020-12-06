@@ -10,6 +10,8 @@ import android.widget.FrameLayout
 import com.google.android.material.chip.Chip
 import com.qii.ntsk.qii.R
 import com.qii.ntsk.qii.databinding.ViewTagChipsBinding
+import com.qii.ntsk.qii.model.entity.Tag
+import com.qii.ntsk.qii.model.entity.Tagging
 import kotlin.random.Random
 
 class TagsChipView @JvmOverloads constructor(
@@ -18,17 +20,46 @@ class TagsChipView @JvmOverloads constructor(
         defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
     private val binding: ViewTagChipsBinding = ViewTagChipsBinding.inflate(LayoutInflater.from(context), this, true)
+    private var tagsStateChangeListener: TagsStateChangeListener? = null
 
-    fun setTags(tags: List<String>) {
+    fun setTags(tags: List<Tag>, closeIconVisibility: Boolean) {
         binding.viewTagChips.removeAllViews()
         tags.forEachIndexed { index, tag ->
             val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_tag_chip, binding.viewTagChips, false) as Chip
             binding.viewTagChips.addView(chip.also {
+                it.isCloseIconVisible = closeIconVisibility
+                it.setOnCloseIconClickListener {chip ->
+                    tagsStateChangeListener?.onStateChanged(
+                            tags.map { t ->
+                                if(t.id == tag.id) {
+                                    t.isSelected = false
+                                }
+                                t
+                            }
+                    )
+                }
                 it.id = View.generateViewId()
-                it.text = tag
+                it.text = tag.id
                 it.chipIcon = generateColorDrawable(index)
             })
         }
+    }
+
+    fun setTaggings(tags: List<Tagging>, closeIconVisibility: Boolean) {
+        binding.viewTagChips.removeAllViews()
+        tags.forEachIndexed { index, tag ->
+            val chip: Chip = LayoutInflater.from(context).inflate(R.layout.view_tag_chip, binding.viewTagChips, false) as Chip
+            binding.viewTagChips.addView(chip.also {
+                it.isCloseIconVisible = closeIconVisibility
+                it.id = View.generateViewId()
+                it.text = tag.name
+                it.chipIcon = generateColorDrawable(index)
+            })
+        }
+    }
+
+    fun setTagsStateChangeListener(tagsStateChangeListener: TagsStateChangeListener) {
+        this.tagsStateChangeListener = tagsStateChangeListener
     }
 
     private fun generateColorDrawable(index: Int): GradientDrawable {
@@ -40,5 +71,9 @@ class TagsChipView @JvmOverloads constructor(
         materialColors.recycle()
         drawable.shape = GradientDrawable.OVAL
         return drawable
+    }
+
+    interface TagsStateChangeListener {
+        fun onStateChanged(tags: List<Tag>)
     }
 }

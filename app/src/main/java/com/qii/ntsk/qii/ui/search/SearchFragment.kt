@@ -14,6 +14,7 @@ import com.qii.ntsk.qii.datasource.repository.PostsRepository
 import com.qii.ntsk.qii.datasource.repository.TagsRepository
 import com.qii.ntsk.qii.model.entity.Tag
 import com.qii.ntsk.qii.model.state.Status
+import com.qii.ntsk.qii.ui.widget.TagsChipView
 import com.qii.ntsk.qii.ui.widget.autoCleared
 import com.qii.ntsk.qii.utils.CustomTabsStarter
 import com.qii.ntsk.qii.utils.QueryBuilder
@@ -59,7 +60,7 @@ class SearchFragment : Fragment(), SearchBottomSheetFragment.FilterStateChangeLi
 
     override fun onStateChanged(query: String, selectedTags: List<Tag>) {
         viewModel.searchWord = query
-        viewModel.selectedTags = selectedTags.toMutableList()
+        viewModel.selectedTags = selectedTags
         binding.fragmentSearchSearchView.setQuery(query, false)
         search()
     }
@@ -83,6 +84,13 @@ class SearchFragment : Fragment(), SearchBottomSheetFragment.FilterStateChangeLi
             view.setQuery(viewModel.searchWord, false)
             view.clearFocus()
         }
+
+        binding.fragmentSearchTagsView.setTagsStateChangeListener(object : TagsChipView.TagsStateChangeListener{
+            override fun onStateChanged(tags: List<Tag>) {
+                viewModel.selectedTags = tags.filter { it.isSelected }
+                search()
+            }
+        })
     }
 
     private fun initBottomSheet() {

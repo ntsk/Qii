@@ -19,15 +19,15 @@ object ViewBindingAdapter {
                 .into(view)
     }
 
-    @BindingAdapter("taggings")
+    @BindingAdapter("taggings", "closeIconVisibility")
     @JvmStatic
-    fun setTaggings(view: TagsChipView, tags: List<Tagging>) {
-        view.setTags(tags.map { it.name })
+    fun setTaggings(view: TagsChipView, tags: List<Tagging>, closeIconVisibility: Boolean = false) {
+        view.setTaggings(tags, closeIconVisibility)
     }
 
-    @BindingAdapter("tags")
+    @BindingAdapter("tags", "closeIconVisibility")
     @JvmStatic
-    fun setTags(view: TagsChipView, tags: List<Tag>) {
-        view.setTags(tags.map { it.id })
+    fun setTags(view: TagsChipView, tags: List<Tag>, closeIconVisibility: Boolean = false) {
+        view.setTags(tags, closeIconVisibility)
     }
 }

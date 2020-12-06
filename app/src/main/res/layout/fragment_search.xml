@@ -21,17 +21,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/fragment_search_search_view"
+        <LinearLayout
+            android:id="@+id/fragment_search_search_view_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_tab_layout_background"
             android:elevation="4dp"
-            android:paddingStart="@dimen/spacing_sub_wide"
-            android:paddingEnd="@dimen/spacing_sub_wide"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/fragment_search_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_sub_wide"
+                android:paddingEnd="@dimen/spacing_sub_wide" />
+
+            <com.qii.ntsk.qii.ui.widget.TagsChipView
+                android:id="@+id/fragment_search_tags_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sub_medium"
+                android:layout_marginEnd="@dimen/spacing_sub_medium"
+                android:visibility="@{viewModel.selectedTagsLiveData.size() > 0 ? View.VISIBLE : View.GONE}"
+                app:tags="@{viewModel.selectedTagsLiveData}"
+                app:closeIconVisibility="@{true}"
+                />
+        </LinearLayout>
 
         <com.qii.ntsk.qii.ui.widget.PostsRecyclerView
             android:id="@+id/fragment_search_posts_recycler_view"
@@ -40,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view_container" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_search_posts_fab"
@@ -61,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view_container" />
 
         <include
             android:id="@+id/fragment_search_empty"
@@ -70,7 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view_container" />
 
         <include
             android:id="@+id/fragment_search_loading"
@@ -81,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_search_search_view_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
