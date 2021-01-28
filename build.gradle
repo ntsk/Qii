@@ -9,7 +9,7 @@ buildscript {
     ext.glideVersion = '4.11.0'
     ext.lifecycleVersion = '2.2.0'
     ext.daggerVersion = '2.28.3-alpha'
-    ext.hiltViewModelVersion = '1.0.0-alpha02'
+    ext.hiltViewModelVersion = '1.0.0-alpha03'
     repositories {
         google()
         jcenter()
